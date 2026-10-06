@@ -1,4 +1,4 @@
-﻿/* Gilmour Stellini: Google review product customiser (static, browser-only).
+/* Gilmour Stellini: Google review product customiser (static, browser-only).
    - Generates a real QR code from the customer's own Google review link (vendor/gsqr.js).
    - Verifies the finished artwork by scanning it back (decodes the rendered image) before an order can be sent.
    - Sends each order request (nothing is stored in the browser) with its review link to
@@ -80,7 +80,7 @@
     if (host === 'g.page' && /\/review\/?$/.test(path)) return { state: 'ok', url: url, msg: 'Google review link recognised.' };
     if (host === 'search.google.com' && /\/local\/writereview/.test(path) && u.searchParams.get('placeid')) return { state: 'ok', url: url, msg: 'Google review link recognised.' };
     if (host === 'g.page' || host === 'g.co' || host === 'maps.app.goo.gl' || (host === 'goo.gl' && /^\/maps/.test(path)) || /(^|\.)google\.[a-z.]+$/.test(host) && (/^\/maps/.test(path) || /^maps\./.test(host)))
-      return { state: 'warn', url: url, msg: 'This is a Google link, but it may open your listing rather than the review form. A direct review link (g.page/r/â€¦/review) works best.' };
+      return { state: 'warn', url: url, msg: 'This is a Google link, but it may open your listing rather than the review form. A direct review link (g.page/r/…/review) works best.' };
     return { state: 'bad', msg: 'This isn\'t a Google link. Use the review link from your Google Business Profile.' };
   }
 
@@ -92,8 +92,8 @@
     document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
   }
   var NFC_ICON = '<svg class="nfc-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8.5a5 5 0 0 1 0 7M9.5 6a8.5 8.5 0 0 1 0 12M13 3.5a12 12 0 0 1 0 17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
-  var STARS = '<span class="stars5">â˜…â˜…â˜…â˜…â˜…</span>';
-  var STAR_BADGE = '<span class="pc-badge" aria-hidden="true">â˜…</span>';
+  var STARS = '<span class="stars5">★★★★★</span>';
+  var STAR_BADGE = '<span class="pc-badge" aria-hidden="true">★</span>';
   var HAND = '<svg class="hand-ic" viewBox="0 0 64 40" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="22" cy="20" rx="20" ry="17"/><path d="M13 14a7 7 0 0 1 0 12M17 11a11 11 0 0 1 0 18M21 8a15 15 0 0 1 0 24"/><rect x="34" y="4" width="13" height="23" rx="2.5"/><path d="M36 27v4c0 3 2 5 5 5h5l8 3M47 14l4-2c2-1 4 1 3 3l-4 6M47 20l5-1"/></g></svg>';
   var SIGNAL = '<svg class="sig-ic" viewBox="0 0 24 18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6.5a14 14 0 0 1 20 0M5.5 10a9 9 0 0 1 13 0M9 13.5a4 4 0 0 1 6 0"/></g><circle cx="12" cy="16.5" r="1.3" fill="currentColor"/></svg>';
 
@@ -153,7 +153,7 @@
     function gate() {
       var ok = verified && verified.ok;
       $('rqSend').disabled = !ok;
-      $('rqGate').textContent = ok ? 'Your QR code is verified and ready to send.' : (res.state === 'empty' ? 'Add and verify your review link to continue.' : res.state === 'bad' ? 'Fix your review link to continue.' : 'Checking your QR codeâ€¦');
+      $('rqGate').textContent = ok ? 'Your QR code is verified and ready to send.' : (res.state === 'empty' ? 'Add and verify your review link to continue.' : res.state === 'bad' ? 'Fix your review link to continue.' : 'Checking your QR code…');
       ['rqSvg', 'rqPng', 'rqCopy'].forEach(function (id) { $(id).disabled = !ok; });
       $('rqTest').setAttribute('aria-disabled', String(!ok)); $('rqTest').href = ok ? res.url : '#';
     }
@@ -169,7 +169,7 @@
       st.qty = Math.max(1, Math.min(1000, parseInt($('rq-qty').value, 10) || 1));
       res = checkLink(st.link);
       var chk = $('rqCheck'); chk.textContent = res.msg; chk.className = 'rq-check ' + res.state;
-      $('rqSummary').textContent = st.qty + ' Ã— ' + ({ dark: 'black', light: 'white', blue: 'blue' }[st.style]) + ' ' + (st.product === 'card' ? 'Google Review NFC Card' : 'Google Review QR Table Stand') + (st.qty > 1 ? 's' : '') + (st.name ? ' for ' + st.name : '');
+      $('rqSummary').textContent = st.qty + ' × ' + ({ dark: 'black', light: 'white', blue: 'blue' }[st.style]) + ' ' + (st.product === 'card' ? 'Google Review NFC Card' : 'Google Review QR Table Stand') + (st.qty > 1 ? 's' : '') + (st.name ? ' for ' + st.name : '');
       preview();
       verified = null; artwork = '';
       var box = $('rqQR');
@@ -177,12 +177,12 @@
       $('rqUrl').textContent = res.url;
       artwork = svgArtwork(res.url, (st.name || 'Business') + ': Google review QR code');
       box.innerHTML = artwork;
-      setVerify('busy', 'Scanning your QR code to check itâ€¦'); gate();
+      setVerify('busy', 'Scanning your QR code to check it…'); gate();
       var my = ++token, url = res.url, art = artwork;
       verify(art, url).then(function (v) {
         if (my !== token) return;
         verified = v;
-        if (v.ok) setVerify('ok', 'âœ“ Verified: scans to exactly this link');
+        if (v.ok) setVerify('ok', '✓ Verified: scans to exactly this link');
         else setVerify('bad', 'The QR code could not be verified. Please check the link, or contact me.');
         gate();
       });
@@ -234,8 +234,8 @@
       };
       var ORDER_URL = window.GS_ORDER_ENDPOINT || (window.GS_WEB3FORMS_KEY ? 'https://api.web3forms.com/submit' : '');
       if (ORDER_URL && MODE !== 'preview') {
-        btn.disabled = true; btn.textContent = 'Sendingâ€¦';
-        /* Sent as an ordinary form submission, so form services (Formspree, Web3Forms, Basinâ€¦) deliver it as a readable email. */
+        btn.disabled = true; btn.textContent = 'Sending...';
+        /* Sent as an ordinary form submission, so form services (Formspree, Web3Forms, Basin…) deliver it as a readable email. */
         var fd = new FormData();
         if (window.GS_WEB3FORMS_KEY && !window.GS_ORDER_ENDPOINT) { fd.append('access_key', window.GS_WEB3FORMS_KEY); fd.append('from_name', 'gilmourstellini.com orders'); }
         var add = function (k, val) { fd.append(k, val == null || val === '' ? '-' : String(val)); };
@@ -260,7 +260,7 @@
         return;
       }
       if (MODE !== 'preview') {
-        var body = ['Order ' + ref, order.product + ' Â· ' + order.design + ' Â· qty ' + order.quantity, 'Business: ' + order.businessName, 'Wording: ' + order.wording, 'Google review link: ' + order.reviewUrl, 'QR verified: yes', '', 'Contact: ' + order.contact.name + ' Â· ' + order.contact.email + ' Â· ' + order.contact.phone, 'Notes: ' + order.notes, '', '(Logo and QR artwork: attach the downloaded order details file.)'].join('\n');
+        var body = ['Order ' + ref, order.product + ' · ' + order.design + ' · qty ' + order.quantity, 'Business: ' + order.businessName, 'Wording: ' + order.wording, 'Google review link: ' + order.reviewUrl, 'QR verified: yes', '', 'Contact: ' + order.contact.name + ' · ' + order.contact.email + ' · ' + order.contact.phone, 'Notes: ' + order.notes, '', '(Logo and QR artwork: attach the downloaded order details file.)'].join('\n');
         location.href = 'mailto:gilmourstellini@icloud.com?subject=' + encodeURIComponent('Review product order ' + ref) + '&body=' + encodeURIComponent(body);
       }
       finish(false);
@@ -277,7 +277,7 @@
         var b = e.target.closest('.prod-thumbs button'); if (!b) return;
         g.querySelectorAll('.prod-thumbs button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
         if (b.dataset.src) main.innerHTML = '<img src="' + b.dataset.src + '" width="' + b.dataset.w + '" height="' + b.dataset.h + '" alt="' + esc(b.dataset.alt) + '" decoding="async">';
-        else main.innerHTML = '<div class="prod-render">' + b.querySelector('.nfc-card').outerHTML + '</div><span class="prod-tag">Blue design Â· preview</span>';
+        else main.innerHTML = '<div class="prod-render">' + b.querySelector('.nfc-card').outerHTML + '</div><span class="prod-tag">Blue design · preview</span>';
       });
     });
   }
@@ -285,5 +285,6 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
   window.GS_REVIEW_BOOT = boot;
 })();
+
 
 
