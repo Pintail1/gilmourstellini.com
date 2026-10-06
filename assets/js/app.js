@@ -1,10 +1,9 @@
-﻿/* Gilmour Stellini â€” site behaviour. Works as a multi-page site (GS_MODE="site") and as a single-file preview (GS_MODE="preview"). */
+﻿/* Gilmour Stellini — site behaviour. Works as a multi-page site (GS_MODE="site") and as a single-file preview (GS_MODE="preview"). */
 (function(){
   'use strict';
   var MODE = window.GS_MODE || 'site';
   var CONTACT_EMAIL = 'gilmourstellini@icloud.com';
   document.documentElement.classList.add('js');
-
   /* ---------- loader: shows once per visit ---------- */
   var loader = document.querySelector('.loader');
   if (loader) {
@@ -12,7 +11,6 @@
     try { seen = sessionStorage.getItem('gs-loader') === '1'; sessionStorage.setItem('gs-loader','1'); } catch(e) {}
     if (seen) loader.remove(); else setTimeout(function(){ loader.remove(); }, 1800);
   }
-
   /* ---------- live project screens ---------- */
   function fit(screen){
     var f = screen.querySelector('iframe'); if (!f) return;
@@ -54,7 +52,6 @@
     });
   }
   window.addEventListener('resize', function(){ document.querySelectorAll('.screen[data-p]').forEach(fit); });
-
   /* ---------- full preview modal ---------- */
   var modal = document.getElementById('modal');
   if (modal) {
@@ -91,7 +88,6 @@
       e.preventDefault(); openModal(b.dataset.open, b.dataset.name || '');
     });
   }
-
   /* ---------- portfolio filters ---------- */
   document.querySelectorAll('.filters').forEach(function(bar){
     var grid = document.getElementById(bar.dataset.for);
@@ -105,16 +101,13 @@
       grid.querySelectorAll('.screen[data-p]').forEach(fit);
     });
   });
-
   /* close hover menus after a click */
   document.addEventListener('click', function(e){ var a = e.target.closest('.dd-panel a'); if (a && document.activeElement) document.activeElement.blur(); });
-
   /* ---------- mobile menu ---------- */
   var menuBtn = document.getElementById('menuBtn'), navLinks = document.getElementById('navLinks');
   if (menuBtn) menuBtn.addEventListener('click', function(){
     var o = navLinks.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', String(o));
   });
-
   /* ---------- copy buttons ---------- */
   document.addEventListener('click', function(e){
     var b = e.target.closest('[data-copy]'); if (!b) return;
@@ -128,7 +121,6 @@
     var v = b.closest('.ditem') && b.closest('.ditem').querySelector('.v'); if (!v) return;
     var r = document.createRange(); r.selectNodeContents(v); var s = getSelection(); s.removeAllRanges(); s.addRange(r);
   }
-
   /* ---------- contact form ---------- */
   var form = document.getElementById('enquiry');
   if (form) {
@@ -187,17 +179,13 @@
       sent.hidden = false;
     });
   }
-
-
   /* ================= EFFECTS ================= */
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = window.matchMedia && matchMedia('(pointer: fine)').matches;
-
   /* scroll progress line */
   var bar = document.createElement('div'); bar.className = 'progress'; document.body.appendChild(bar);
   var onScroll = function(){ var h = document.documentElement.scrollHeight - innerHeight; bar.style.transform = 'scaleX(' + (h > 0 ? scrollY / h : 0) + ')'; };
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
-
   /* headline decode: letters resolve from code glyphs */
   var GLY = '<>/{}[]=;01#$%&*+';
   function scramble(el){
@@ -227,7 +215,6 @@
     })(start);
   }
   window.GS_SCRAMBLE = scramble;
-
   /* signal pulses travelling along the hero grid */
   function pulses(host){
     if (reduce || host.dataset.pulsed) return; host.dataset.pulsed = '1';
@@ -255,7 +242,6 @@
     }
     requestAnimationFrame(loop);
   }
-
   /* 3D tilt toward the pointer */
   function tilt(el, max){
     if (reduce || !fine || el.dataset.tilt) return; el.dataset.tilt = '1'; el.classList.add('tilt');
@@ -266,13 +252,11 @@
     });
     host.addEventListener('pointerleave', function(){ el.style.transform = ''; });
   }
-
   /* spotlight that follows the pointer inside cards */
   document.addEventListener('pointermove', function(e){
     var c = e.target.closest && e.target.closest('.spot'); if (!c) return;
     var r = c.getBoundingClientRect(); c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px');
   }, { passive: true });
-
   /* timeline draws itself when it scrolls into view */
   function drawFlow(f){
     if (f.dataset.drawn) return; f.dataset.drawn = '1'; f.classList.add('drawn');
@@ -281,7 +265,6 @@
     var t0 = performance.now();
     (function step(now){ var p = Math.min(1, (now - t0) / 1800); f.style.setProperty('--fp', (p * 100) + '%'); bs.forEach(function(b, i){ if (p >= i / (n - 1 || 1) - .02) b.classList.add('lit'); }); if (p < 1) requestAnimationFrame(step); })(t0);
   }
-
   var fxIO = ('IntersectionObserver' in window) ? new IntersectionObserver(function(es){
     es.forEach(function(e){ if (!e.isIntersecting) return; var t = e.target;
       if (t.classList.contains('flow')) drawFlow(t);
@@ -291,7 +274,6 @@
       fxIO.unobserve(t);
     });
   }, { threshold: .08 }) : null;
-
   function applyFx(root){
     root.querySelectorAll('.svc-card,.tile,.hl,.work-card,.cmp,.cbox,.fr-vis').forEach(function(c){ c.classList.add('spot'); });
     root.querySelectorAll('.comp .grid-bg').forEach(function(g){ pulses(g.parentElement); });
@@ -301,7 +283,6 @@
     root.querySelectorAll('.sec-head h2').forEach(function(h){ var r = h.getBoundingClientRect(); if (r.top > innerHeight && fxIO) { h.classList.add('wipe'); h.closest('.sec-head').setAttribute('data-wipe', ''); } });
     root.querySelectorAll('.flow,[data-wipe],[data-scramble],[data-livecode]').forEach(function(el){ if (fxIO) fxIO.observe(el); else { el.classList.add('in'); } });
   }
-
   /* ================= LIVE CODE ================= */
   var SNIPS = [
     { f: 0, step: 1, code: [
@@ -327,9 +308,8 @@
       ['','  '],['t-fn','openWhatsApp'],['t-p','('],['t-str',"'Hi! Is Saturday free?'"],['t-p',');\n'],
       ['t-p','});']] }
   ];
-  var TERM = [['cmd','$ npm run build'],['dim','  compiling 12 pagesâ€¦'],['ok','âœ“ pages built'],['ok','âœ“ images converted to webp'],['ok','âœ“ accessibility checks passed'],['cmd','$ deploy --production'],['ok','âœ“ live Â· concept preview']];
+  var TERM = [['cmd','$ npm run build'],['dim','  compiling 12 pages…'],['ok','✓ pages built'],['ok','✓ images converted to webp'],['ok','✓ accessibility checks passed'],['cmd','$ deploy --production'],['ok','✓ live · concept preview']];
   var escH = function(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
-
   function startLive(root){
     if (root.dataset.started) return; root.dataset.started = '1';
     var code = root.querySelector('.lc-code code'), gut = root.querySelector('.lc-gutter'), tabs = root.querySelectorAll('.lc-tab'),
@@ -345,7 +325,7 @@
     var full = function(s){ return s.code.reduce(function(a, t){ return a + t[1].length; }, 0); };
     (async function loop(){
       for (;;) {
-        stage.dataset.step = '0'; out.innerHTML = '<span class="dim">$ waitingâ€¦</span>'; st.classList.remove('ok'); stt.textContent = 'Writing codeâ€¦';
+        stage.dataset.step = '0'; out.innerHTML = '<span class="dim">$ waiting…</span>'; st.classList.remove('ok'); stt.textContent = 'Writing code…';
         for (var s = 0; s < SNIPS.length; s++) {
           var sn = SNIPS[s]; tabs.forEach(function(t, i){ t.classList.toggle('on', i === sn.f); });
           var tot = full(sn);
@@ -355,17 +335,15 @@
           stage.dataset.step = String(sn.step); stt.textContent = ['', 'HTML rendered', 'Styles applied', 'Interaction added'][sn.step];
           await wait(1500);
         }
-        out.innerHTML = ''; stt.textContent = 'Buildingâ€¦';
+        out.innerHTML = ''; stt.textContent = 'Building…';
         for (var j = 0; j < TERM.length; j++) { out.innerHTML += '<span class="' + TERM[j][0] + '">' + escH(TERM[j][1]) + '</span>\n'; await wait(TERM[j][0] === 'dim' ? 700 : 420); }
-        stage.dataset.step = '4'; st.classList.add('ok'); stt.textContent = 'Deployed Â· all checks passed';
+        stage.dataset.step = '4'; st.classList.add('ok'); stt.textContent = 'Deployed · all checks passed';
         await wait(4200);
       }
     })();
   }
-
   /* marquee duplicates its own content for a seamless loop */
   document.querySelectorAll('.marquee-track,.rib-track').forEach(function(t){ if (!t.dataset.dup) { t.dataset.dup = '1'; t.innerHTML += t.innerHTML; } });
-
   /* ---------- preview router (single-file preview only) ---------- */
   if (MODE === 'preview') {
     var pages = {};
@@ -421,5 +399,3 @@
     document.addEventListener('click', function(e){ var a = e.target.closest('a[href^="#"]'); if (!a || e.defaultPrevented) return; var t = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1))); if (!t) return; e.preventDefault(); history.pushState(null, '', a.getAttribute('href')); t.scrollIntoView({ behavior: reduce ? 'instant' : 'smooth', block: 'start' }); });
   }
 })();
-
-
