@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumière Beauty — Hair, Skin &amp; Beauty Studio</title>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<style>
+  :root{
+    --blush:#F7E9E3; --ivory:#FBF6F0; --rose:#B76E79; --rose-deep:#96525D;
+    --mauve:#4A3B3D; --gold:#C9A574; --line:rgba(74,59,61,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{ scroll-behavior:smooth; }
+  body{ font-family:'Jost',sans-serif; background:var(--ivory); color:var(--mauve); line-height:1.7; font-weight:300; }
+  h1,h2,h3,.display{ font-family:'Cormorant Garamond',serif; font-weight:600; letter-spacing:0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1160px; margin:0 auto; padding:0 32px; }
+  @media (max-width:640px){ .wrap{ padding:0 22px; } }
+  .section{ padding:110px 0; }
+  .section.tight{ padding:76px 0; }
+  .eyebrow{ text-transform:uppercase; letter-spacing:0.28em; font-size:0.72rem; color:var(--rose); margin-bottom:18px; font-weight:500; }
+  .section-head{ max-width:600px; margin:0 auto 60px; text-align:center; }
+  .section-head h2{ font-size:clamp(2.1rem,4vw,3rem); margin-bottom:16px; }
+  .section-head p{ color:#7d6c6e; font-size:1.05rem; }
+  .btn-rose{ background:var(--rose); color:#fff; padding:16px 36px; border-radius:100px; font-size:0.9rem; letter-spacing:0.05em; display:inline-block; transition:background .2s, transform .2s; }
+  .btn-rose:hover{ background:var(--rose-deep); transform:translateY(-2px); }
+  .btn-line{ border:1px solid var(--mauve); color:var(--mauve); padding:15px 34px; border-radius:100px; font-size:0.88rem; display:inline-block; transition:all .2s; }
+  .btn-line:hover{ background:var(--mauve); color:#fff; }
+
+  header{ position:sticky; top:0; z-index:100; background:rgba(251,246,240,0.9); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .navbar{ display:flex; align-items:center; justify-content:space-between; padding:24px 32px; }
+  .logo{ font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:600; letter-spacing:0.03em; }
+  .nav-links{ display:flex; gap:38px; align-items:center; }
+  .nav-links a:not(.btn-rose){ font-size:0.82rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--mauve); }
+  .menu-toggle{ display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; padding:6px; }
+  .menu-toggle span{ width:22px; height:1.5px; background:var(--mauve); }
+  .mobile-panel{ display:none; flex-direction:column; padding:6px 32px 22px; gap:2px; }
+  .mobile-panel a{ padding:12px 0; border-bottom:1px solid var(--line); text-transform:uppercase; font-size:0.85rem; letter-spacing:0.08em; }
+  .mobile-panel.open{ display:flex; }
+  @media (max-width:900px){ .nav-links{ display:none; } .menu-toggle{ display:flex; } }
+
+  .hero{ position:relative; padding:90px 0 100px; overflow:hidden; }
+  .hero-bg{ position:absolute; inset:0; background:radial-gradient(ellipse at 75% 30%, var(--blush) 0%, var(--ivory) 60%); z-index:0; }
+  .hero-grid{ position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:50px; }
+  .hero h1{ font-size:clamp(2.6rem,5.6vw,4.2rem); line-height:1.06; margin-bottom:24px; }
+  .hero h1 em{ font-style:italic; color:var(--rose); }
+  .hero p.lede{ font-size:1.1rem; color:#7d6c6e; max-width:440px; margin-bottom:34px; }
+  .hero-visual{ position:relative; height:400px; display:flex; align-items:center; justify-content:center; }
+  .petal-ring{ position:absolute; width:340px; height:340px; border-radius:50%; border:1px solid var(--rose); opacity:0.35; }
+  .petal-ring.two{ width:260px; height:260px; }
+  .center-orb{ width:200px; height:200px; border-radius:50%; background:linear-gradient(150deg, var(--rose), var(--gold)); box-shadow:0 30px 60px rgba(150,82,93,0.35); display:flex; align-items:center; justify-content:center; }
+  .center-orb svg{ width:70px; height:70px; }
+  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } .hero-visual{ height:260px; } .petal-ring{ width:220px; height:220px; } .petal-ring.two{ width:170px; height:170px; } .center-orb{ width:130px; height:130px; } }
+
+  .offer-banner{ background:var(--rose); color:#fff; text-align:center; padding:14px; font-size:0.9rem; letter-spacing:0.04em; }
+  .offer-banner strong{ font-weight:600; }
+
+  .service-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
+  .service-card{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:36px 30px; text-align:center; transition:transform .25s, box-shadow .25s; }
+  .service-card:hover{ transform:translateY(-6px); box-shadow:0 24px 50px -20px rgba(74,59,61,0.25); }
+  .service-icon{ width:52px; height:52px; margin:0 auto 20px; color:var(--rose); }
+  .service-card h3{ font-size:1.35rem; margin-bottom:10px; }
+  .service-card p{ font-size:0.9rem; color:#7d6c6e; margin-bottom:16px; }
+  .service-card .from{ font-size:0.85rem; color:var(--rose); font-weight:500; letter-spacing:0.03em; }
+  @media (max-width:860px){ .service-grid{ grid-template-columns:1fr; } }
+
+  .package-strip{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:50px; }
+  .package-card{ border:1px dashed var(--rose); border-radius:16px; padding:28px; text-align:center; }
+  .package-card .price{ font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--rose); margin:10px 0; }
+  @media (max-width:860px){ .package-strip{ grid-template-columns:1fr; } }
+
+  .team-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; }
+  .team-card{ text-align:center; }
+  .team-avatar{ width:110px; height:110px; border-radius:50%; margin:0 auto 16px; background:linear-gradient(150deg,#F2D9CF,var(--rose)); display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:#fff; }
+  .team-card h3{ font-size:1.15rem; margin-bottom:4px; }
+  .team-card .role{ font-size:0.78rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--rose); }
+  @media (max-width:860px){ .team-grid{ grid-template-columns:repeat(2,1fr); } }
+
+  .ba-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .ba-card{ border-radius:16px; overflow:hidden; border:1px solid var(--line); }
+  .ba-split{ display:flex; height:180px; }
+  .ba-split div{ flex:1; display:flex; align-items:center; justify-content:center; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:#fff; }
+  .ba-split .before{ background:linear-gradient(160deg,#DDBFB8,#B9938C); }
+  .ba-split .after{ background:linear-gradient(160deg,var(--rose),var(--rose-deep)); }
+  .ba-label{ padding:14px; text-align:center; font-size:0.9rem; background:#fff; }
+  @media (max-width:860px){ .ba-grid{ grid-template-columns:1fr; } }
+
+  .testimonial-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .testimonial-card{ background:#fff; border-radius:16px; padding:30px; border:1px solid var(--line); }
+  .stars{ color:var(--gold); margin-bottom:14px; letter-spacing:2px; }
+  .testimonial-card p{ font-size:0.95rem; color:#5c4c4e; margin-bottom:16px; font-style:italic; }
+  @media (max-width:860px){ .testimonial-row{ grid-template-columns:1fr; } }
+
+  .contact-split{ display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+  .hours-row{ display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--line); }
+  .hours-row span:first-child{ color:#7d6c6e; }
+  @media (max-width:860px){ .contact-split{ grid-template-columns:1fr; gap:36px; } }
+
+  .insta-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+  .insta-tile{ aspect-ratio:1; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; }
+  .insta-tile:nth-child(5n+1){ background:var(--blush); }
+  .insta-tile:nth-child(5n+2){ background:#F2DCD3; }
+  .insta-tile:nth-child(5n+3){ background:#EFD2E0; }
+  .insta-tile:nth-child(5n+4){ background:#F6E7DE; }
+  .insta-tile:nth-child(5n+5){ background:#EAD8DC; }
+  @media (max-width:760px){ .insta-grid{ grid-template-columns:repeat(3,1fr); } }
+
+  footer{ background:var(--mauve); color:#E9DEDD; padding:60px 0 30px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px; }
+  .footer-grid h4{ font-family:'Cormorant Garamond',serif; font-size:1.2rem; margin-bottom:14px; color:#fff; }
+  .footer-grid a, .footer-grid p{ display:block; color:#D8C7C6; font-size:0.9rem; margin-bottom:10px; }
+  .footer-bottom{ border-top:1px solid rgba(255,255,255,0.12); padding-top:22px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:0.8rem; color:#C6B3B2; }
+  @media (max-width:760px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
+.insta-tile{font-size:0!important;background-size:70% auto!important;background-position:center!important;background-repeat:no-repeat!important}.insta-tile:nth-child(1){background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNCNzZFNzkiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxyZWN0IHg9IjQ2IiB5PSI0OCIgd2lkdGg9IjI4IiBoZWlnaHQ9IjQ2IiByeD0iNiIvPjxwYXRoIGQ9Ik01MiA0OHYtOGgxNnY4TTU2IDQwdi04aDh2OE01MiA2NmgxNiIvPjwvZz48L3N2Zz4=")!important}.insta-tile:nth-child(2){background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNCNzZFNzkiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik00OCA1OGgyNHYzNGE0IDQgMCAwIDEtNCA0SDUyYTQgNCAwIDAgMS00LTR6TTU0IDU4VjM2aDEydjIyIi8+PHBhdGggZD0iTTUyIDcyaDE2Ii8+PC9nPjwvc3ZnPg==")!important}.insta-tile:nth-child(3){background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNCNzZFNzkiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjYwIiBjeT0iNTYiIHI9IjciLz48Y2lyY2xlIGN4PSI2MCIgY3k9IjQwIiByPSI5Ii8+PGNpcmNsZSBjeD0iNzYiIGN5PSI1NiIgcj0iOSIvPjxjaXJjbGUgY3g9IjYwIiBjeT0iNzIiIHI9IjkiLz48Y2lyY2xlIGN4PSI0NCIgY3k9IjU2IiByPSI5Ii8+PHBhdGggZD0iTTYwIDgxdjE3Ii8+PC9nPjwvc3ZnPg==")!important}.insta-tile:nth-child(4){background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNCNzZFNzkiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik02MCAzMGw2IDIwIDIwIDYtMjAgNi02IDIwLTYtMjAtMjAtNiAyMC02ek04NiAzMGwyIDYgNiAyLTYgMi0yIDYtMi02LTYtMiA2LTJ6Ii8+PC9nPjwvc3ZnPg==")!important}.insta-tile:nth-child(5){background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNCNzZFNzkiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0zOCAzNmMyMCAxMCAyMCAzOCAwIDQ4TTUyIDM0YzIwIDEyIDIwIDQwIDAgNTJNNjYgMzRjMjAgMTIgMjAgNDAgMCA1Mk04MCAzNmMxNiAxMCAxNiAzOCAwIDQ4Ii8+PC9nPjwvc3ZnPg==")!important}.ba-split .before{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTgwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjM1IiBzdHJva2Utd2lkdGg9IjEuNCI+PHBhdGggZD0iTTEwIDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik0xOSAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNMjggMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTM3IDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik00NiAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNNTUgMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTY0IDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik03MyAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNODIgMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTkxIDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik0xMDAgMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTEwOSAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNMTE4IDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjwvZz48L3N2Zz4="),linear-gradient(160deg,#C9B0A8,#9E8580)!important;background-size:cover!important}.ba-split .after{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTgwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEuNiI+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMjUiIGQ9Ik02IDAgQzI2IDQwIC04IDkwIDEyIDEzMCBTMjAgMTcwIDEwIDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjMiIGQ9Ik0xNSAwIEMzNSA0MCAxIDkwIDIxIDEzMCBTMjkgMTcwIDE5IDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjM1IiBkPSJNMjQgMCBDNDQgNDAgMTAgOTAgMzAgMTMwIFMzOCAxNzAgMjggMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuNCIgZD0iTTMzIDAgQzUzIDQwIDE5IDkwIDM5IDEzMCBTNDcgMTcwIDM3IDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBkPSJNNDIgMCBDNjIgNDAgMjggOTAgNDggMTMwIFM1NiAxNzAgNDYgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMyIgZD0iTTUxIDAgQzcxIDQwIDM3IDkwIDU3IDEzMCBTNjUgMTcwIDU1IDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjM1IiBkPSJNNjAgMCBDODAgNDAgNDYgOTAgNjYgMTMwIFM3NCAxNzAgNjQgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuNCIgZD0iTTY5IDAgQzg5IDQwIDU1IDkwIDc1IDEzMCBTODMgMTcwIDczIDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBkPSJNNzggMCBDOTggNDAgNjQgOTAgODQgMTMwIFM5MiAxNzAgODIgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMyIgZD0iTTg3IDAgQzEwNyA0MCA3MyA5MCA5MyAxMzAgUzEwMSAxNzAgOTEgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMzUiIGQ9Ik05NiAwIEMxMTYgNDAgODIgOTAgMTAyIDEzMCBTMTEwIDE3MCAxMDAgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuNCIgZD0iTTEwNSAwIEMxMjUgNDAgOTEgOTAgMTExIDEzMCBTMTE5IDE3MCAxMDkgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMjUiIGQ9Ik0xMTQgMCBDMTM0IDQwIDEwMCA5MCAxMjAgMTMwIFMxMjggMTcwIDExOCAxODAiLz48cGF0aCBzdHJva2Utb3BhY2l0eT0iMC4zIiBkPSJNMTIzIDAgQzE0MyA0MCAxMDkgOTAgMTI5IDEzMCBTMTM3IDE3MCAxMjcgMTgwIi8+PC9nPjxwYXRoIGQ9Ik0wIDcwIEM0MCA2MCA4MCA4MCAxMjAgNjQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2Utb3BhY2l0eT0iLjM1IiBmaWxsPSJub25lIi8+PC9zdmc+"),linear-gradient(160deg,#C98892,#96525D)!important;background-size:cover!important}.ba-split div{align-items:flex-end!important;justify-content:flex-start!important;padding:12px;text-shadow:0 1px 6px rgba(0,0,0,.45)}.center-orb{width:330px!important;height:330px!important;background:url("/assets/img/stock/990374a78bcf.webp") center/cover,linear-gradient(150deg,#B76E79,#C9A574)!important}.center-orb svg{display:none}.petal-ring{width:420px!important;height:420px!important}.petal-ring.two{width:376px!important;height:376px!important}@media (max-width:900px){.center-orb{width:210px!important;height:210px!important}.petal-ring{width:270px!important;height:270px!important}.petal-ring.two{width:240px!important;height:240px!important}}.service-card{overflow:hidden}.service-card::before{content:"";display:block;height:160px;margin:-36px -30px 22px;background-position:center;background-size:cover}.service-card:nth-child(1)::before{background-image:url("/assets/img/stock/0e4a4f04ea29.webp")}.service-card:nth-child(2)::before{background-image:url("/assets/img/stock/ed199a6a5705.webp")}.service-card:nth-child(3)::before{background-image:url("/assets/img/stock/5670b9f41308.webp")}.service-card:nth-child(4)::before{background-image:url("/assets/img/stock/72c7d4f55353.webp")}.service-card:nth-child(5)::before{background-image:url("/assets/img/stock/b3b1168c6a95.webp")}.service-card:nth-child(6)::before{background-image:url("/assets/img/stock/0505159f574a.webp")}.ba-card:nth-child(1) .before{background-image:linear-gradient(transparent 55%,rgba(0,0,0,.45)),url("/assets/img/stock/b1374e7109d2.webp"),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTgwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjM1IiBzdHJva2Utd2lkdGg9IjEuNCI+PHBhdGggZD0iTTEwIDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik0xOSAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNMjggMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTM3IDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik00NiAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNNTUgMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTY0IDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik03MyAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNODIgMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTkxIDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik0xMDAgMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTEwOSAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNMTE4IDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjwvZz48L3N2Zz4="),linear-gradient(160deg,#C9B0A8,#9E8580)!important;background-size:cover!important;background-position:center!important;filter:saturate(.55) brightness(.92)}.ba-card:nth-child(1) .after{background-image:linear-gradient(transparent 55%,rgba(0,0,0,.45)),url("/assets/img/stock/c54959f95504.webp"),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTgwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEuNiI+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMjUiIGQ9Ik02IDAgQzI2IDQwIC04IDkwIDEyIDEzMCBTMjAgMTcwIDEwIDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjMiIGQ9Ik0xNSAwIEMzNSA0MCAxIDkwIDIxIDEzMCBTMjkgMTcwIDE5IDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjM1IiBkPSJNMjQgMCBDNDQgNDAgMTAgOTAgMzAgMTMwIFMzOCAxNzAgMjggMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuNCIgZD0iTTMzIDAgQzUzIDQwIDE5IDkwIDM5IDEzMCBTNDcgMTcwIDM3IDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBkPSJNNDIgMCBDNjIgNDAgMjggOTAgNDggMTMwIFM1NiAxNzAgNDYgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMyIgZD0iTTUxIDAgQzcxIDQwIDM3IDkwIDU3IDEzMCBTNjUgMTcwIDU1IDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjM1IiBkPSJNNjAgMCBDODAgNDAgNDYgOTAgNjYgMTMwIFM3NCAxNzAgNjQgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuNCIgZD0iTTY5IDAgQzg5IDQwIDU1IDkwIDc1IDEzMCBTODMgMTcwIDczIDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBkPSJNNzggMCBDOTggNDAgNjQgOTAgODQgMTMwIFM5MiAxNzAgODIgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMyIgZD0iTTg3IDAgQzEwNyA0MCA3MyA5MCA5MyAxMzAgUzEwMSAxNzAgOTEgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMzUiIGQ9Ik05NiAwIEMxMTYgNDAgODIgOTAgMTAyIDEzMCBTMTEwIDE3MCAxMDAgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuNCIgZD0iTTEwNSAwIEMxMjUgNDAgOTEgOTAgMTExIDEzMCBTMTE5IDE3MCAxMDkgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMjUiIGQ9Ik0xMTQgMCBDMTM0IDQwIDEwMCA5MCAxMjAgMTMwIFMxMjggMTcwIDExOCAxODAiLz48cGF0aCBzdHJva2Utb3BhY2l0eT0iMC4zIiBkPSJNMTIzIDAgQzE0MyA0MCAxMDkgOTAgMTI5IDEzMCBTMTM3IDE3MCAxMjcgMTgwIi8+PC9nPjxwYXRoIGQ9Ik0wIDcwIEM0MCA2MCA4MCA4MCAxMjAgNjQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2Utb3BhY2l0eT0iLjM1IiBmaWxsPSJub25lIi8+PC9zdmc+"),linear-gradient(160deg,#C98892,#96525D)!important;background-size:cover!important;background-position:center!important}.ba-card:nth-child(2) .before{background-image:linear-gradient(transparent 55%,rgba(0,0,0,.45)),url("/assets/img/stock/c1e61e7835e7.webp"),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTgwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjM1IiBzdHJva2Utd2lkdGg9IjEuNCI+PHBhdGggZD0iTTEwIDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik0xOSAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNMjggMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTM3IDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik00NiAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNNTUgMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTY0IDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik03MyAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNODIgMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTkxIDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik0xMDAgMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTEwOSAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNMTE4IDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjwvZz48L3N2Zz4="),linear-gradient(160deg,#C9B0A8,#9E8580)!important;background-size:cover!important;background-position:center!important;filter:saturate(.55) brightness(.92)}.ba-card:nth-child(2) .after{background-image:linear-gradient(transparent 55%,rgba(0,0,0,.45)),url("/assets/img/stock/2d5465921d38.webp"),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTgwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEuNiI+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMjUiIGQ9Ik02IDAgQzI2IDQwIC04IDkwIDEyIDEzMCBTMjAgMTcwIDEwIDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjMiIGQ9Ik0xNSAwIEMzNSA0MCAxIDkwIDIxIDEzMCBTMjkgMTcwIDE5IDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjM1IiBkPSJNMjQgMCBDNDQgNDAgMTAgOTAgMzAgMTMwIFMzOCAxNzAgMjggMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuNCIgZD0iTTMzIDAgQzUzIDQwIDE5IDkwIDM5IDEzMCBTNDcgMTcwIDM3IDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBkPSJNNDIgMCBDNjIgNDAgMjggOTAgNDggMTMwIFM1NiAxNzAgNDYgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMyIgZD0iTTUxIDAgQzcxIDQwIDM3IDkwIDU3IDEzMCBTNjUgMTcwIDU1IDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjM1IiBkPSJNNjAgMCBDODAgNDAgNDYgOTAgNjYgMTMwIFM3NCAxNzAgNjQgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuNCIgZD0iTTY5IDAgQzg5IDQwIDU1IDkwIDc1IDEzMCBTODMgMTcwIDczIDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBkPSJNNzggMCBDOTggNDAgNjQgOTAgODQgMTMwIFM5MiAxNzAgODIgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMyIgZD0iTTg3IDAgQzEwNyA0MCA3MyA5MCA5MyAxMzAgUzEwMSAxNzAgOTEgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMzUiIGQ9Ik05NiAwIEMxMTYgNDAgODIgOTAgMTAyIDEzMCBTMTEwIDE3MCAxMDAgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuNCIgZD0iTTEwNSAwIEMxMjUgNDAgOTEgOTAgMTExIDEzMCBTMTE5IDE3MCAxMDkgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMjUiIGQ9Ik0xMTQgMCBDMTM0IDQwIDEwMCA5MCAxMjAgMTMwIFMxMjggMTcwIDExOCAxODAiLz48cGF0aCBzdHJva2Utb3BhY2l0eT0iMC4zIiBkPSJNMTIzIDAgQzE0MyA0MCAxMDkgOTAgMTI5IDEzMCBTMTM3IDE3MCAxMjcgMTgwIi8+PC9nPjxwYXRoIGQ9Ik0wIDcwIEM0MCA2MCA4MCA4MCAxMjAgNjQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2Utb3BhY2l0eT0iLjM1IiBmaWxsPSJub25lIi8+PC9zdmc+"),linear-gradient(160deg,#C98892,#96525D)!important;background-size:cover!important;background-position:center!important}.ba-card:nth-child(3) .before{background-image:linear-gradient(transparent 55%,rgba(0,0,0,.45)),url("/assets/img/stock/58f43442badc.webp"),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTgwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjM1IiBzdHJva2Utd2lkdGg9IjEuNCI+PHBhdGggZD0iTTEwIDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik0xOSAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNMjggMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTM3IDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik00NiAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNNTUgMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTY0IDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik03MyAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNODIgMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTkxIDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjxwYXRoIGQ9Ik0xMDAgMCBsNCAxOCAtNSAxNiA2IDE4IC02IDE4IDUgMjAgLTQgMTggNiAyMiAtNSAyMCA0IDMwIi8+PHBhdGggZD0iTTEwOSAwIGw0IDE4IC01IDE2IDYgMTggLTYgMTggNSAyMCAtNCAxOCA2IDIyIC01IDIwIDQgMzAiLz48cGF0aCBkPSJNMTE4IDAgbDQgMTggLTUgMTYgNiAxOCAtNiAxOCA1IDIwIC00IDE4IDYgMjIgLTUgMjAgNCAzMCIvPjwvZz48L3N2Zz4="),linear-gradient(160deg,#C9B0A8,#9E8580)!important;background-size:cover!important;background-position:center!important;filter:saturate(.55) brightness(.92)}.ba-card:nth-child(3) .after{background-image:linear-gradient(transparent 55%,rgba(0,0,0,.45)),url("/assets/img/stock/758c7dfdc0b9.webp"),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTgwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEuNiI+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMjUiIGQ9Ik02IDAgQzI2IDQwIC04IDkwIDEyIDEzMCBTMjAgMTcwIDEwIDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjMiIGQ9Ik0xNSAwIEMzNSA0MCAxIDkwIDIxIDEzMCBTMjkgMTcwIDE5IDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjM1IiBkPSJNMjQgMCBDNDQgNDAgMTAgOTAgMzAgMTMwIFMzOCAxNzAgMjggMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuNCIgZD0iTTMzIDAgQzUzIDQwIDE5IDkwIDM5IDEzMCBTNDcgMTcwIDM3IDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBkPSJNNDIgMCBDNjIgNDAgMjggOTAgNDggMTMwIFM1NiAxNzAgNDYgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMyIgZD0iTTUxIDAgQzcxIDQwIDM3IDkwIDU3IDEzMCBTNjUgMTcwIDU1IDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjM1IiBkPSJNNjAgMCBDODAgNDAgNDYgOTAgNjYgMTMwIFM3NCAxNzAgNjQgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuNCIgZD0iTTY5IDAgQzg5IDQwIDU1IDkwIDc1IDEzMCBTODMgMTcwIDczIDE4MCIvPjxwYXRoIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBkPSJNNzggMCBDOTggNDAgNjQgOTAgODQgMTMwIFM5MiAxNzAgODIgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMyIgZD0iTTg3IDAgQzEwNyA0MCA3MyA5MCA5MyAxMzAgUzEwMSAxNzAgOTEgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMzUiIGQ9Ik05NiAwIEMxMTYgNDAgODIgOTAgMTAyIDEzMCBTMTEwIDE3MCAxMDAgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuNCIgZD0iTTEwNSAwIEMxMjUgNDAgOTEgOTAgMTExIDEzMCBTMTE5IDE3MCAxMDkgMTgwIi8+PHBhdGggc3Ryb2tlLW9wYWNpdHk9IjAuMjUiIGQ9Ik0xMTQgMCBDMTM0IDQwIDEwMCA5MCAxMjAgMTMwIFMxMjggMTcwIDExOCAxODAiLz48cGF0aCBzdHJva2Utb3BhY2l0eT0iMC4zIiBkPSJNMTIzIDAgQzE0MyA0MCAxMDkgOTAgMTI5IDEzMCBTMTM3IDE3MCAxMjcgMTgwIi8+PC9nPjxwYXRoIGQ9Ik0wIDcwIEM0MCA2MCA4MCA4MCAxMjAgNjQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2Utb3BhY2l0eT0iLjM1IiBmaWxsPSJub25lIi8+PC9zdmc+"),linear-gradient(160deg,#C98892,#96525D)!important;background-size:cover!important;background-position:center!important}.ba-split{height:220px!important}.insta-tile:nth-child(1){background:url("/assets/img/stock/5333f0fc25d0.webp") center/cover,url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNCNzZFNzkiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxyZWN0IHg9IjQ2IiB5PSI0OCIgd2lkdGg9IjI4IiBoZWlnaHQ9IjQ2IiByeD0iNiIvPjxwYXRoIGQ9Ik01MiA0OHYtOGgxNnY4TTU2IDQwdi04aDh2OE01MiA2NmgxNiIvPjwvZz48L3N2Zz4=") center/70% no-repeat,#F7E9E3!important}.insta-tile:nth-child(2){background:url("/assets/img/stock/c3b5e2865a95.webp") center/cover,url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNCNzZFNzkiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik00OCA1OGgyNHYzNGE0IDQgMCAwIDEtNCA0SDUyYTQgNCAwIDAgMS00LTR6TTU0IDU4VjM2aDEydjIyIi8+PHBhdGggZD0iTTUyIDcyaDE2Ii8+PC9nPjwvc3ZnPg==") center/70% no-repeat,#F7E9E3!important}.insta-tile:nth-child(3){background:url("/assets/img/stock/98e8bc757048.webp") center/cover,url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNCNzZFNzkiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjYwIiBjeT0iNTYiIHI9IjciLz48Y2lyY2xlIGN4PSI2MCIgY3k9IjQwIiByPSI5Ii8+PGNpcmNsZSBjeD0iNzYiIGN5PSI1NiIgcj0iOSIvPjxjaXJjbGUgY3g9IjYwIiBjeT0iNzIiIHI9IjkiLz48Y2lyY2xlIGN4PSI0NCIgY3k9IjU2IiByPSI5Ii8+PHBhdGggZD0iTTYwIDgxdjE3Ii8+PC9nPjwvc3ZnPg==") center/70% no-repeat,#F7E9E3!important}.insta-tile:nth-child(4){background:url("/assets/img/stock/54c27ff65a03.webp") center/cover,url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNCNzZFNzkiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik02MCAzMGw2IDIwIDIwIDYtMjAgNi02IDIwLTYtMjAtMjAtNiAyMC02ek04NiAzMGwyIDYgNiAyLTYgMi0yIDYtMi02LTYtMiA2LTJ6Ii8+PC9nPjwvc3ZnPg==") center/70% no-repeat,#F7E9E3!important}.insta-tile:nth-child(5){background:url("/assets/img/stock/337023024475.webp") center/cover,url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNCNzZFNzkiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0zOCAzNmMyMCAxMCAyMCAzOCAwIDQ4TTUyIDM0YzIwIDEyIDIwIDQwIDAgNTJNNjYgMzRjMjAgMTIgMjAgNDAgMCA1Mk04MCAzNmMxNiAxMCAxNiAzOCAwIDQ4Ii8+PC9nPjwvc3ZnPg==") center/70% no-repeat,#F7E9E3!important}</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <a href="#top" class="logo">Lumière Beauty</a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#team">Team</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="#book" class="btn-rose">Book Now</a>
+    </nav>
+    <button class="menu-toggle" onclick="document.getElementById('mp').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-panel" id="mp">
+    <a href="#services">Services</a>
+    <a href="#team">Team</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="#book">Book Now</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Hair · Skin · Beauty</div>
+      <h1>Feel radiant,<br><em>inside and out.</em></h1>
+      <p class="lede">A calm, considered space for hair, skin, and beauty — where every treatment is tailored to you, not rushed through a checklist.</p>
+      <div class="hero-actions" style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="#book" class="btn-rose">Book an Appointment</a>
+        <a href="#services" class="btn-line">Explore Treatments</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="petal-ring"></div>
+      <div class="petal-ring two"></div>
+      <div class="center-orb">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.2"><path d="M12 2C9 6 6 9 6 13a6 6 0 0 0 12 0c0-4-3-7-6-11Z"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="offer-banner">✨ <strong>New client offer</strong> — 15% off your first facial or lash treatment this month</div>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Treatments</div>
+      <h2>Our Services</h2>
+      <p>Every service starts with a consultation, so your treatment is designed around you.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 3c-3 3-7 6-7 11a7 7 0 0 0 14 0c0-5-4-8-7-11Z"/></svg>
+        <h3>Hair</h3>
+        <p>Cut, colour, balayage, and blow-dry styling from our senior stylists.</p>
+        <div class="from">From $65</div>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>
+        <h3>Nails</h3>
+        <p>Manicures, pedicures, and long-lasting gel finishes in your favourite shade.</p>
+        <div class="from">From $35</div>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 12h16M4 12c0-3 4-3 4-6M20 12c0-3-4-3-4-6"/></svg>
+        <h3>Brows &amp; Lashes</h3>
+        <p>Shaping, tinting, lamination, and lash lifts for a naturally polished look.</p>
+        <div class="from">From $28</div>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="5" y="4" width="14" height="16" rx="3"/><path d="M9 9h6M9 13h6"/></svg>
+        <h3>Facials</h3>
+        <p>Deep-cleansing and hydrating facials tailored to your skin's needs.</p>
+        <div class="from">From $75</div>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z"/></svg>
+        <h3>Makeup</h3>
+        <p>Special-occasion and bridal makeup, with a trial session included.</p>
+        <div class="from">From $85</div>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 4h16v4H4zM4 16h16v4H4zM8 8v8M16 8v8"/></svg>
+        <h3>Packages</h3>
+        <p>Bundle treatments together and save — see our curated packages below.</p>
+        <div class="from">From $120</div>
+      </div>
+    </div>
+
+    <div class="package-strip">
+      <div class="package-card">
+        <div class="eyebrow" style="margin-bottom:6px">Bridal</div>
+        <h3>The Bridal Glow</h3>
+        <div class="price">$280</div>
+        <p style="font-size:0.85rem; color:#7d6c6e;">Hair, makeup &amp; trial session included</p>
+      </div>
+      <div class="package-card">
+        <div class="eyebrow" style="margin-bottom:6px">Self-care</div>
+        <h3>The Refresh</h3>
+        <div class="price">$135</div>
+        <p style="font-size:0.85rem; color:#7d6c6e;">Facial, brow shape &amp; gel manicure</p>
+      </div>
+      <div class="package-card">
+        <div class="eyebrow" style="margin-bottom:6px">Girls' Day</div>
+        <h3>The Glow Up</h3>
+        <div class="price">$210</div>
+        <p style="font-size:0.85rem; color:#7d6c6e;">Blow-dry, lashes &amp; mini facial for two</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="team" style="background:var(--blush)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Our People</div>
+      <h2>Meet The Team</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card"><div class="team-avatar">SL</div><h3>Sophie Laurent</h3><div class="role">Founder &amp; Stylist</div></div>
+      <div class="team-card"><div class="team-avatar">MK</div><h3>Mia Kwan</h3><div class="role">Senior Colourist</div></div>
+      <div class="team-card"><div class="team-avatar">AR</div><h3>Amara Reyes</h3><div class="role">Esthetician</div></div>
+      <div class="team-card"><div class="team-avatar">CF</div><h3>Chloe Fontaine</h3><div class="role">Nail &amp; Lash Artist</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Real Results</div>
+      <h2>Before &amp; After</h2>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-card"><div class="ba-split"><div class="before">Before</div><div class="after">After</div></div><div class="ba-label">Balayage Transformation</div></div>
+      <div class="ba-card"><div class="ba-split"><div class="before">Before</div><div class="after">After</div></div><div class="ba-label">Brow Lamination</div></div>
+      <div class="ba-card"><div class="ba-split"><div class="before">Before</div><div class="after">After</div></div><div class="ba-label">Hydrating Facial</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="reviews" style="background:var(--blush)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Client Love</div>
+      <h2>Testimonials</h2>
+    </div>
+    <div class="testimonial-row">
+      <div class="testimonial-card"><div class="stars">★★★★★</div><p>"Sophie completely transformed my hair and actually listened to what I wanted. I've never felt so confident."</p><div style="font-weight:500">— Elena V.</div></div>
+      <div class="testimonial-card"><div class="stars">★★★★★</div><p>"The facial was so relaxing I nearly fell asleep. My skin has never looked better."</p><div style="font-weight:500">— Priya N.</div></div>
+      <div class="testimonial-card"><div class="stars">★★★★★</div><p>"Booked the bridal package for my wedding — everyone asked who did my makeup. Perfection."</p><div style="font-weight:500">— Grace T.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap contact-split">
+    <div>
+      <div class="eyebrow">Opening Hours</div>
+      <h2 style="font-size:2rem; margin-bottom:20px;">When To Visit</h2>
+      <div class="hours-row"><span>Tuesday – Friday</span><span>9:00 – 19:00</span></div>
+      <div class="hours-row"><span>Saturday</span><span>9:00 – 17:00</span></div>
+      <div class="hours-row"><span>Sunday – Monday</span><span>Closed</span></div>
+    </div>
+    <div>
+      <div class="eyebrow">Find Us</div>
+      <h2 style="font-size:2rem; margin-bottom:20px;">Contact</h2>
+      <p style="margin-bottom:10px;">📍 42 Rosewood Lane, Midtown</p>
+      <p style="margin-bottom:10px;">📞 (555) 027-7731</p>
+      <p style="margin-bottom:24px;">✉ hello@lumierebeauty.example</p>
+      <a href="#book" class="btn-rose">Book an Appointment</a>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="book" style="background:var(--mauve); color:#fff; text-align:center;">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--gold)">Ready For Your Glow-Up?</div>
+    <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem); margin-bottom:18px; color:#fff;">Reserve Your Appointment</h2>
+    <p style="color:#D8C7C6; max-width:460px; margin:0 auto 30px;">Choose your treatment and a time that suits you, and we'll confirm your appointment by text.</p>
+    <a href="#top" class="btn-rose">Book Now</a>
+  </div>
+</section>
+
+<section class="section tight">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:30px;">
+      <div class="eyebrow">Follow Along</div>
+      <h2>@lumierebeauty</h2>
+    </div>
+    <div class="insta-grid">
+      <div class="insta-tile">💄</div><div class="insta-tile">💅</div><div class="insta-tile">🌸</div><div class="insta-tile">✨</div><div class="insta-tile">💇‍♀️</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div><h4>Lumière Beauty</h4><p>42 Rosewood Lane, Midtown. A calm space for hair, skin, and beauty.</p></div>
+    <div><h4>Explore</h4><a href="#services">Services</a><a href="#team">Team</a><a href="#gallery">Gallery</a><a href="#reviews">Reviews</a></div>
+    <div><h4>Contact</h4><a href="tel:+15550277731">(555) 027-7731</a><a href="mailto:hello@lumierebeauty.example">hello@lumierebeauty.example</a></div>
+    <div><h4>Follow</h4><a href="#">Instagram</a><a href="#">Facebook</a></div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 Lumière Beauty. All rights reserved.</span>
+    <span>Concept website by Gilmour Stellini</span>
+  </div>
+</footer>
+
+<script>(function(){var framed=window.top!==window.self;document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a');if(!a)return;var h=a.getAttribute('href')||'';e.preventDefault();if(h.charAt(0)==='#'){var t=h.length>1?document.getElementById(h.slice(1)):null;if(t)t.scrollIntoView({behavior:'smooth'});else window.scrollTo({top:0,behavior:'smooth'});}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);window.addEventListener('message',function(e){var d=e.data||{};if(!d.gsScroll)return;var el=document.querySelector(d.gsScroll);if(!el)return;document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,el.getBoundingClientRect().top+window.pageYOffset-(d.gsOffset||0));});if(!framed){var b=document.createElement('a');b.href='/portfolio/lumiere-beauty/';b.textContent='Concept website by Gilmour Stellini → back to case study';b.setAttribute('style','position:fixed;left:16px;bottom:16px;z-index:9999;background:#0E1522;color:#F4F5F2;font:600 13px/1.2 system-ui,sans-serif;padding:10px 14px;border-radius:999px;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.3)');b.addEventListener('click',function(e){e.stopPropagation();},true);document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(b);});window.addEventListener('click',function(e){if(e.target===b){window.location.href=b.href;}},true);}})();</script></body>
+</html>

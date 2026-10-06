@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apex Auto Detailing — Precision Car Care</title>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<style>
+  :root{
+    --black:#0A0A0C; --black-soft:#151417; --red:#E10600; --red-dark:#A50400;
+    --silver:#C7C9CC; --white:#F5F5F6; --line:rgba(245,245,246,0.1);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{ scroll-behavior:smooth; }
+  body{ font-family:'Inter',sans-serif; background:var(--black); color:var(--white); line-height:1.6; }
+  h1,h2,h3,.display{ font-family:'Rajdhani',sans-serif; text-transform:uppercase; font-weight:700; letter-spacing:0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1200px; margin:0 auto; padding:0 32px; }
+  @media (max-width:640px){ .wrap{ padding:0 20px; } }
+  .section{ padding:100px 0; }
+  .section.tight{ padding:70px 0; }
+  .eyebrow{ color:var(--red); font-weight:700; letter-spacing:0.14em; text-transform:uppercase; font-size:0.82rem; margin-bottom:16px; }
+  .section-head{ max-width:620px; margin-bottom:54px; }
+  .section-head h2{ font-size:clamp(2.1rem,4.2vw,3.1rem); margin-bottom:14px; }
+  .section-head p{ color:var(--silver); font-size:1.05rem; }
+  .btn-red{ background:var(--red); color:#fff; padding:17px 36px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; font-size:0.9rem; display:inline-block; clip-path:polygon(6% 0,100% 0,94% 100%,0 100%); transition:background .2s; }
+  .btn-red:hover{ background:var(--red-dark); }
+  .btn-ghost{ border:1px solid var(--line); color:var(--white); padding:16px 32px; text-transform:uppercase; letter-spacing:0.05em; font-size:0.86rem; font-weight:600; display:inline-block; transition:border-color .2s; }
+  .btn-ghost:hover{ border-color:var(--red); }
+
+  header{ position:sticky; top:0; z-index:100; background:rgba(10,10,12,0.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .navbar{ display:flex; align-items:center; justify-content:space-between; padding:20px 32px; }
+  .logo{ font-family:'Rajdhani',sans-serif; font-weight:700; font-size:1.5rem; text-transform:uppercase; letter-spacing:0.03em; display:flex; align-items:center; gap:10px; }
+  .logo span{ color:var(--red); }
+  .nav-links{ display:flex; gap:34px; align-items:center; }
+  .nav-links a:not(.btn-red){ font-size:0.85rem; text-transform:uppercase; letter-spacing:0.06em; font-weight:600; color:var(--silver); }
+  .nav-links a:not(.btn-red):hover{ color:var(--red); }
+  .menu-toggle{ display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; padding:6px; }
+  .menu-toggle span{ width:24px; height:2px; background:var(--white); }
+  .mobile-panel{ display:none; flex-direction:column; padding:8px 32px 22px; }
+  .mobile-panel a{ padding:12px 0; border-bottom:1px solid var(--line); text-transform:uppercase; font-size:0.88rem; letter-spacing:0.05em; font-weight:600; }
+  .mobile-panel.open{ display:flex; }
+  @media (max-width:900px){ .nav-links{ display:none; } .menu-toggle{ display:flex; } }
+
+  .hero{ position:relative; padding:110px 0 90px; overflow:hidden; background:linear-gradient(180deg, var(--black-soft), var(--black)); }
+  .speed-lines{ position:absolute; inset:0; z-index:0; opacity:0.5; overflow:hidden; }
+  .speed-lines span{ position:absolute; height:2px; background:linear-gradient(90deg, transparent, var(--red), transparent); width:60%; }
+  .hero-content{ position:relative; z-index:1; text-align:center; max-width:780px; margin:0 auto; }
+  .hero h1{ font-size:clamp(2.8rem,7vw,5.2rem); line-height:0.98; margin-bottom:22px; }
+  .hero h1 span{ color:var(--red); }
+  .hero p.lede{ color:var(--silver); font-size:1.15rem; max-width:520px; margin:0 auto 36px; }
+  .hero-actions{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .hero-car{ margin:60px auto 0; max-width:700px; height:2px; background:linear-gradient(90deg,transparent,var(--red),transparent); position:relative; }
+  .hero-car::after{ content:''; position:absolute; left:50%; top:-60px; transform:translateX(-50%); width:220px; height:120px; background:radial-gradient(ellipse, rgba(225,6,0,0.18), transparent 70%); }
+
+  .stat-strip{ background:var(--black-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:34px 0; }
+  .stat-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; text-align:center; }
+  .stat-grid div{ flex:1; min-width:140px; }
+  .stat-num{ font-family:'Rajdhani',sans-serif; font-size:2.4rem; font-weight:700; color:var(--red); }
+  .stat-label{ font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--silver); margin-top:2px; }
+
+  .service-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); }
+  .service-card{ background:var(--black-soft); padding:36px 30px; transition:background .2s; position:relative; }
+  .service-card:hover{ background:#1c1a1d; }
+  .service-card:hover::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--red); }
+  .service-icon{ width:44px; height:44px; color:var(--red); margin-bottom:18px; }
+  .service-card h3{ font-size:1.3rem; margin-bottom:10px; }
+  .service-card p{ color:var(--silver); font-size:0.9rem; }
+  @media (max-width:860px){ .service-grid{ grid-template-columns:1fr; } }
+
+  .package-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:20px; }
+  .package-card{ background:var(--black-soft); border:1px solid var(--line); padding:36px 28px; position:relative; }
+  .package-card.popular{ border-color:var(--red); }
+  .popular-tag{ position:absolute; top:-14px; left:28px; background:var(--red); color:#fff; font-size:0.7rem; padding:5px 12px; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; }
+  .package-card h3{ font-size:1.3rem; margin-bottom:6px; }
+  .package-price{ font-family:'Rajdhani',sans-serif; font-size:2.4rem; color:var(--red); font-weight:700; margin:12px 0; }
+  .package-card ul{ list-style:none; margin:20px 0; }
+  .package-card li{ padding:8px 0; border-top:1px solid var(--line); font-size:0.9rem; color:var(--silver); }
+  @media (max-width:860px){ .package-grid{ grid-template-columns:1fr; } }
+
+  .process-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; }
+  .process-row::before{ content:''; position:absolute; top:24px; left:8%; right:8%; height:1px; background:var(--line); }
+  .process-step{ position:relative; padding:0 16px; text-align:center; }
+  .process-num{ width:48px; height:48px; border-radius:50%; background:var(--red); color:#fff; font-family:'Rajdhani',sans-serif; font-weight:700; font-size:1.2rem; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; position:relative; z-index:1; }
+  .process-step h3{ font-size:1.05rem; margin-bottom:8px; }
+  .process-step p{ font-size:0.85rem; color:var(--silver); }
+  @media (max-width:760px){ .process-row{ grid-template-columns:1fr; } .process-row::before{ display:none; } .process-step{ margin-bottom:30px; } }
+
+  .ba-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .ba-card{ position:relative; height:220px; border-radius:4px; overflow:hidden; display:flex; }
+  .ba-card .half{ flex:1; display:flex; align-items:flex-end; padding:16px; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; }
+  .ba-card .half.before{ background:linear-gradient(160deg,#2a2a2d,#141315); }
+  .ba-card .half.after{ background:linear-gradient(160deg,#3a0d0a,#1a0605); }
+  @media (max-width:860px){ .ba-grid{ grid-template-columns:1fr; } }
+
+  .review-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .review-card{ background:var(--black-soft); border:1px solid var(--line); padding:28px; }
+  .stars{ color:var(--red); margin-bottom:14px; letter-spacing:2px; }
+  .review-card p{ color:var(--silver); font-size:0.95rem; margin-bottom:16px; }
+  @media (max-width:860px){ .review-grid{ grid-template-columns:1fr; } }
+
+  .contact-split{ display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+  .hours-row{ display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--line); font-size:0.95rem; }
+  .hours-row span:first-child{ color:var(--silver); }
+  @media (max-width:860px){ .contact-split{ grid-template-columns:1fr; gap:36px; } }
+
+  footer{ background:var(--black-soft); border-top:1px solid var(--line); padding:56px 0 28px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px; }
+  .footer-grid h4{ font-family:'Rajdhani',sans-serif; text-transform:uppercase; letter-spacing:0.06em; font-size:0.95rem; margin-bottom:14px; color:var(--red); }
+  .footer-grid a, .footer-grid p{ display:block; color:var(--silver); font-size:0.9rem; margin-bottom:10px; }
+  .footer-bottom{ border-top:1px solid var(--line); padding-top:22px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:0.8rem; color:var(--silver); }
+  @media (max-width:760px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
+.ba-card .half.before{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMTIwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij48cGF0aCBkPSJNOCA4MiBRMTAgNjYgMzAgNjIgTDYyIDU3IFE4MCAzOCAxMDQgMzYgTDEzNiAzNiBRMTUyIDM4IDE2NiA1NCBMMTg2IDU4IFExOTYgNjIgMTk2IDc0IEwxOTYgODQgTDggODQgWiIgZmlsbD0iIzVhNWQ2MyIvPjxwYXRoIGQ9Ik03MiA1NyBRODYgNDIgMTA0IDQxIEwxMTggNDEgTDExOCA1N1ogTTEyNCA0MSBMMTM2IDQxIFExNDggNDMgMTU4IDU1IEwxMjQgNTZaIiBmaWxsPSIjMTExMzFhIiBvcGFjaXR5PSIuNzUiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjcwIiByPSI2IiBmaWxsPSJub25lIiBzdHJva2U9IiM4ZDkwOTciIHN0cm9rZS13aWR0aD0iLjYiIG9wYWNpdHk9Ii44Ii8+PGNpcmNsZSBjeD0iOTAiIGN5PSI2NCIgcj0iOSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGQ5MDk3IiBzdHJva2Utd2lkdGg9Ii42IiBvcGFjaXR5PSIuOCIvPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjY4IiByPSI3IiBmaWxsPSJub25lIiBzdHJva2U9IiM4ZDkwOTciIHN0cm9rZS13aWR0aD0iLjYiIG9wYWNpdHk9Ii44Ii8+PGNpcmNsZSBjeD0iMTcyIiBjeT0iNzIiIHI9IjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhkOTA5NyIgc3Ryb2tlLXdpZHRoPSIuNiIgb3BhY2l0eT0iLjgiLz48Y2lyY2xlIGN4PSIxMTgiIGN5PSI3MiIgcj0iNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGQ5MDk3IiBzdHJva2Utd2lkdGg9Ii42IiBvcGFjaXR5PSIuOCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iODQiIHI9IjEzIiBmaWxsPSIjMGIwYzEwIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI4NCIgcj0iNiIgZmlsbD0iIzhiOGY5OCIvPjxjaXJjbGUgY3g9IjE1OCIgY3k9Ijg0IiByPSIxMyIgZmlsbD0iIzBiMGMxMCIvPjxjaXJjbGUgY3g9IjE1OCIgY3k9Ijg0IiByPSI2IiBmaWxsPSIjOGI4Zjk4Ii8+PC9zdmc+"),linear-gradient(160deg,#2a2a2d,#141315)!important;background-repeat:no-repeat!important;background-size:88% auto,cover!important;background-position:center 40%,center!important}.ba-card .half.after{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMTIwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij48cGF0aCBkPSJNOCA4MiBRMTAgNjYgMzAgNjIgTDYyIDU3IFE4MCAzOCAxMDQgMzYgTDEzNiAzNiBRMTUyIDM4IDE2NiA1NCBMMTg2IDU4IFExOTYgNjIgMTk2IDc0IEwxOTYgODQgTDggODQgWiIgZmlsbD0iI0M4MTIwQyIvPjxwYXRoIGQ9Ik03MiA1NyBRODYgNDIgMTA0IDQxIEwxMTggNDEgTDExOCA1N1ogTTEyNCA0MSBMMTM2IDQxIFExNDggNDMgMTU4IDU1IEwxMjQgNTZaIiBmaWxsPSIjMTExMzFhIiBvcGFjaXR5PSIuNzUiLz48cGF0aCBkPSJNMjAgNjYgUTcwIDU4IDE5MCA2NCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNCIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iLjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMDAgNDAgUTEyMCAzOCAxNDAgNDAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjYiIGZpbGw9Im5vbmUiIG9wYWNpdHk9Ii42Ii8+PGNpcmNsZSBjeD0iNTAiIGN5PSI4NCIgcj0iMTMiIGZpbGw9IiMwYjBjMTAiLz48Y2lyY2xlIGN4PSI1MCIgY3k9Ijg0IiByPSI2IiBmaWxsPSIjOGI4Zjk4Ii8+PGNpcmNsZSBjeD0iMTU4IiBjeT0iODQiIHI9IjEzIiBmaWxsPSIjMGIwYzEwIi8+PGNpcmNsZSBjeD0iMTU4IiBjeT0iODQiIHI9IjYiIGZpbGw9IiM4YjhmOTgiLz48L3N2Zz4="),radial-gradient(circle at 50% 35%,#3a0d0a,#120404)!important;background-repeat:no-repeat!important;background-size:88% auto,cover!important;background-position:center 40%,center!important}.hero{background:linear-gradient(180deg,rgba(10,10,12,.72),rgba(10,10,12,.94)),url("/assets/img/stock/3e80c1f8652b.webp") center/cover,linear-gradient(180deg,#151417,#0A0A0C)!important}.service-card::after{content:"";position:absolute;inset:0;background-position:center;background-size:cover;opacity:.18;transition:opacity .3s;z-index:0}.service-card:hover::after{opacity:.32}.service-card>*{position:relative;z-index:1}.service-card:nth-child(1)::after{background-image:url("/assets/img/stock/b874c0296fdc.webp")}.service-card:nth-child(2)::after{background-image:url("/assets/img/stock/9cabfd2a3179.webp")}.service-card:nth-child(3)::after{background-image:url("/assets/img/stock/5914125a23b9.webp")}.service-card:nth-child(4)::after{background-image:url("/assets/img/stock/1a6b18a6d66a.webp")}.service-card:nth-child(5)::after{background-image:url("/assets/img/stock/0dc6e0337256.webp")}.service-card:nth-child(6)::after{background-image:url("/assets/img/stock/358edf402079.webp")}.ba-card:nth-child(1) .half.before{background:linear-gradient(transparent 55%,rgba(0,0,0,.6)),url("/assets/img/stock/746c3250f366.webp") center/cover,url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMTIwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij48cGF0aCBkPSJNOCA4MiBRMTAgNjYgMzAgNjIgTDYyIDU3IFE4MCAzOCAxMDQgMzYgTDEzNiAzNiBRMTUyIDM4IDE2NiA1NCBMMTg2IDU4IFExOTYgNjIgMTk2IDc0IEwxOTYgODQgTDggODQgWiIgZmlsbD0iIzVhNWQ2MyIvPjxwYXRoIGQ9Ik03MiA1NyBRODYgNDIgMTA0IDQxIEwxMTggNDEgTDExOCA1N1ogTTEyNCA0MSBMMTM2IDQxIFExNDggNDMgMTU4IDU1IEwxMjQgNTZaIiBmaWxsPSIjMTExMzFhIiBvcGFjaXR5PSIuNzUiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjcwIiByPSI2IiBmaWxsPSJub25lIiBzdHJva2U9IiM4ZDkwOTciIHN0cm9rZS13aWR0aD0iLjYiIG9wYWNpdHk9Ii44Ii8+PGNpcmNsZSBjeD0iOTAiIGN5PSI2NCIgcj0iOSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGQ5MDk3IiBzdHJva2Utd2lkdGg9Ii42IiBvcGFjaXR5PSIuOCIvPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjY4IiByPSI3IiBmaWxsPSJub25lIiBzdHJva2U9IiM4ZDkwOTciIHN0cm9rZS13aWR0aD0iLjYiIG9wYWNpdHk9Ii44Ii8+PGNpcmNsZSBjeD0iMTcyIiBjeT0iNzIiIHI9IjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhkOTA5NyIgc3Ryb2tlLXdpZHRoPSIuNiIgb3BhY2l0eT0iLjgiLz48Y2lyY2xlIGN4PSIxMTgiIGN5PSI3MiIgcj0iNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGQ5MDk3IiBzdHJva2Utd2lkdGg9Ii42IiBvcGFjaXR5PSIuOCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iODQiIHI9IjEzIiBmaWxsPSIjMGIwYzEwIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI4NCIgcj0iNiIgZmlsbD0iIzhiOGY5OCIvPjxjaXJjbGUgY3g9IjE1OCIgY3k9Ijg0IiByPSIxMyIgZmlsbD0iIzBiMGMxMCIvPjxjaXJjbGUgY3g9IjE1OCIgY3k9Ijg0IiByPSI2IiBmaWxsPSIjOGI4Zjk4Ii8+PC9zdmc+") center/88% no-repeat,#1c1c1f!important;filter:saturate(.5)}.ba-card:nth-child(1) .half.after{background:linear-gradient(transparent 55%,rgba(0,0,0,.6)),url("/assets/img/stock/b776adfb11dc.webp") center/cover,url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMTIwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij48cGF0aCBkPSJNOCA4MiBRMTAgNjYgMzAgNjIgTDYyIDU3IFE4MCAzOCAxMDQgMzYgTDEzNiAzNiBRMTUyIDM4IDE2NiA1NCBMMTg2IDU4IFExOTYgNjIgMTk2IDc0IEwxOTYgODQgTDggODQgWiIgZmlsbD0iI0M4MTIwQyIvPjxwYXRoIGQ9Ik03MiA1NyBRODYgNDIgMTA0IDQxIEwxMTggNDEgTDExOCA1N1ogTTEyNCA0MSBMMTM2IDQxIFExNDggNDMgMTU4IDU1IEwxMjQgNTZaIiBmaWxsPSIjMTExMzFhIiBvcGFjaXR5PSIuNzUiLz48cGF0aCBkPSJNMjAgNjYgUTcwIDU4IDE5MCA2NCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNCIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iLjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMDAgNDAgUTEyMCAzOCAxNDAgNDAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjYiIGZpbGw9Im5vbmUiIG9wYWNpdHk9Ii42Ii8+PGNpcmNsZSBjeD0iNTAiIGN5PSI4NCIgcj0iMTMiIGZpbGw9IiMwYjBjMTAiLz48Y2lyY2xlIGN4PSI1MCIgY3k9Ijg0IiByPSI2IiBmaWxsPSIjOGI4Zjk4Ii8+PGNpcmNsZSBjeD0iMTU4IiBjeT0iODQiIHI9IjEzIiBmaWxsPSIjMGIwYzEwIi8+PGNpcmNsZSBjeD0iMTU4IiBjeT0iODQiIHI9IjYiIGZpbGw9IiM4YjhmOTgiLz48L3N2Zz4=") center/88% no-repeat,#1a0605!important}.ba-card:nth-child(2) .half.before{background:linear-gradient(transparent 55%,rgba(0,0,0,.6)),url("/assets/img/stock/cb55b7734159.webp") center/cover,url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMTIwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij48cGF0aCBkPSJNOCA4MiBRMTAgNjYgMzAgNjIgTDYyIDU3IFE4MCAzOCAxMDQgMzYgTDEzNiAzNiBRMTUyIDM4IDE2NiA1NCBMMTg2IDU4IFExOTYgNjIgMTk2IDc0IEwxOTYgODQgTDggODQgWiIgZmlsbD0iIzVhNWQ2MyIvPjxwYXRoIGQ9Ik03MiA1NyBRODYgNDIgMTA0IDQxIEwxMTggNDEgTDExOCA1N1ogTTEyNCA0MSBMMTM2IDQxIFExNDggNDMgMTU4IDU1IEwxMjQgNTZaIiBmaWxsPSIjMTExMzFhIiBvcGFjaXR5PSIuNzUiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjcwIiByPSI2IiBmaWxsPSJub25lIiBzdHJva2U9IiM4ZDkwOTciIHN0cm9rZS13aWR0aD0iLjYiIG9wYWNpdHk9Ii44Ii8+PGNpcmNsZSBjeD0iOTAiIGN5PSI2NCIgcj0iOSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGQ5MDk3IiBzdHJva2Utd2lkdGg9Ii42IiBvcGFjaXR5PSIuOCIvPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjY4IiByPSI3IiBmaWxsPSJub25lIiBzdHJva2U9IiM4ZDkwOTciIHN0cm9rZS13aWR0aD0iLjYiIG9wYWNpdHk9Ii44Ii8+PGNpcmNsZSBjeD0iMTcyIiBjeT0iNzIiIHI9IjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhkOTA5NyIgc3Ryb2tlLXdpZHRoPSIuNiIgb3BhY2l0eT0iLjgiLz48Y2lyY2xlIGN4PSIxMTgiIGN5PSI3MiIgcj0iNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGQ5MDk3IiBzdHJva2Utd2lkdGg9Ii42IiBvcGFjaXR5PSIuOCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iODQiIHI9IjEzIiBmaWxsPSIjMGIwYzEwIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI4NCIgcj0iNiIgZmlsbD0iIzhiOGY5OCIvPjxjaXJjbGUgY3g9IjE1OCIgY3k9Ijg0IiByPSIxMyIgZmlsbD0iIzBiMGMxMCIvPjxjaXJjbGUgY3g9IjE1OCIgY3k9Ijg0IiByPSI2IiBmaWxsPSIjOGI4Zjk4Ii8+PC9zdmc+") center/88% no-repeat,#1c1c1f!important;filter:saturate(.5)}.ba-card:nth-child(2) .half.after{background:linear-gradient(transparent 55%,rgba(0,0,0,.6)),url("/assets/img/stock/c75216658b88.webp") center/cover,url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMTIwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij48cGF0aCBkPSJNOCA4MiBRMTAgNjYgMzAgNjIgTDYyIDU3IFE4MCAzOCAxMDQgMzYgTDEzNiAzNiBRMTUyIDM4IDE2NiA1NCBMMTg2IDU4IFExOTYgNjIgMTk2IDc0IEwxOTYgODQgTDggODQgWiIgZmlsbD0iI0M4MTIwQyIvPjxwYXRoIGQ9Ik03MiA1NyBRODYgNDIgMTA0IDQxIEwxMTggNDEgTDExOCA1N1ogTTEyNCA0MSBMMTM2IDQxIFExNDggNDMgMTU4IDU1IEwxMjQgNTZaIiBmaWxsPSIjMTExMzFhIiBvcGFjaXR5PSIuNzUiLz48cGF0aCBkPSJNMjAgNjYgUTcwIDU4IDE5MCA2NCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNCIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iLjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMDAgNDAgUTEyMCAzOCAxNDAgNDAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjYiIGZpbGw9Im5vbmUiIG9wYWNpdHk9Ii42Ii8+PGNpcmNsZSBjeD0iNTAiIGN5PSI4NCIgcj0iMTMiIGZpbGw9IiMwYjBjMTAiLz48Y2lyY2xlIGN4PSI1MCIgY3k9Ijg0IiByPSI2IiBmaWxsPSIjOGI4Zjk4Ii8+PGNpcmNsZSBjeD0iMTU4IiBjeT0iODQiIHI9IjEzIiBmaWxsPSIjMGIwYzEwIi8+PGNpcmNsZSBjeD0iMTU4IiBjeT0iODQiIHI9IjYiIGZpbGw9IiM4YjhmOTgiLz48L3N2Zz4=") center/88% no-repeat,#1a0605!important}.ba-card:nth-child(3) .half.before{background:linear-gradient(transparent 55%,rgba(0,0,0,.6)),url("/assets/img/stock/654e1cfac8ff.webp") center/cover,url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMTIwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij48cGF0aCBkPSJNOCA4MiBRMTAgNjYgMzAgNjIgTDYyIDU3IFE4MCAzOCAxMDQgMzYgTDEzNiAzNiBRMTUyIDM4IDE2NiA1NCBMMTg2IDU4IFExOTYgNjIgMTk2IDc0IEwxOTYgODQgTDggODQgWiIgZmlsbD0iIzVhNWQ2MyIvPjxwYXRoIGQ9Ik03MiA1NyBRODYgNDIgMTA0IDQxIEwxMTggNDEgTDExOCA1N1ogTTEyNCA0MSBMMTM2IDQxIFExNDggNDMgMTU4IDU1IEwxMjQgNTZaIiBmaWxsPSIjMTExMzFhIiBvcGFjaXR5PSIuNzUiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjcwIiByPSI2IiBmaWxsPSJub25lIiBzdHJva2U9IiM4ZDkwOTciIHN0cm9rZS13aWR0aD0iLjYiIG9wYWNpdHk9Ii44Ii8+PGNpcmNsZSBjeD0iOTAiIGN5PSI2NCIgcj0iOSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGQ5MDk3IiBzdHJva2Utd2lkdGg9Ii42IiBvcGFjaXR5PSIuOCIvPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjY4IiByPSI3IiBmaWxsPSJub25lIiBzdHJva2U9IiM4ZDkwOTciIHN0cm9rZS13aWR0aD0iLjYiIG9wYWNpdHk9Ii44Ii8+PGNpcmNsZSBjeD0iMTcyIiBjeT0iNzIiIHI9IjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhkOTA5NyIgc3Ryb2tlLXdpZHRoPSIuNiIgb3BhY2l0eT0iLjgiLz48Y2lyY2xlIGN4PSIxMTgiIGN5PSI3MiIgcj0iNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGQ5MDk3IiBzdHJva2Utd2lkdGg9Ii42IiBvcGFjaXR5PSIuOCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iODQiIHI9IjEzIiBmaWxsPSIjMGIwYzEwIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI4NCIgcj0iNiIgZmlsbD0iIzhiOGY5OCIvPjxjaXJjbGUgY3g9IjE1OCIgY3k9Ijg0IiByPSIxMyIgZmlsbD0iIzBiMGMxMCIvPjxjaXJjbGUgY3g9IjE1OCIgY3k9Ijg0IiByPSI2IiBmaWxsPSIjOGI4Zjk4Ii8+PC9zdmc+") center/88% no-repeat,#1c1c1f!important;filter:saturate(.5)}.ba-card:nth-child(3) .half.after{background:linear-gradient(transparent 55%,rgba(0,0,0,.6)),url("/assets/img/stock/2c48f54efa23.webp") center/cover,url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMTIwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij48cGF0aCBkPSJNOCA4MiBRMTAgNjYgMzAgNjIgTDYyIDU3IFE4MCAzOCAxMDQgMzYgTDEzNiAzNiBRMTUyIDM4IDE2NiA1NCBMMTg2IDU4IFExOTYgNjIgMTk2IDc0IEwxOTYgODQgTDggODQgWiIgZmlsbD0iI0M4MTIwQyIvPjxwYXRoIGQ9Ik03MiA1NyBRODYgNDIgMTA0IDQxIEwxMTggNDEgTDExOCA1N1ogTTEyNCA0MSBMMTM2IDQxIFExNDggNDMgMTU4IDU1IEwxMjQgNTZaIiBmaWxsPSIjMTExMzFhIiBvcGFjaXR5PSIuNzUiLz48cGF0aCBkPSJNMjAgNjYgUTcwIDU4IDE5MCA2NCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNCIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iLjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMDAgNDAgUTEyMCAzOCAxNDAgNDAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjYiIGZpbGw9Im5vbmUiIG9wYWNpdHk9Ii42Ii8+PGNpcmNsZSBjeD0iNTAiIGN5PSI4NCIgcj0iMTMiIGZpbGw9IiMwYjBjMTAiLz48Y2lyY2xlIGN4PSI1MCIgY3k9Ijg0IiByPSI2IiBmaWxsPSIjOGI4Zjk4Ii8+PGNpcmNsZSBjeD0iMTU4IiBjeT0iODQiIHI9IjEzIiBmaWxsPSIjMGIwYzEwIi8+PGNpcmNsZSBjeD0iMTU4IiBjeT0iODQiIHI9IjYiIGZpbGw9IiM4YjhmOTgiLz48L3N2Zz4=") center/88% no-repeat,#1a0605!important}</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <a href="#top" class="logo">APEX<span>.</span></a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#packages">Packages</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="#quote" class="btn-red">Get a Quote</a>
+    </nav>
+    <button class="menu-toggle" onclick="document.getElementById('mp').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-panel" id="mp">
+    <a href="#services">Services</a>
+    <a href="#packages">Packages</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="#quote">Get a Quote</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="speed-lines">
+    <span style="top:20%; left:-20%; animation:none;"></span>
+    <span style="top:55%; left:-30%;"></span>
+    <span style="top:80%; left:-10%;"></span>
+  </div>
+  <div class="wrap hero-content">
+    <div class="eyebrow" style="text-align:center;">Precision Detailing</div>
+    <h1>Your car,<br><span>perfected.</span></h1>
+    <p class="lede">Ceramic coatings, paint correction, and full interior/exterior detailing — the kind of finish that turns heads in the parking lot.</p>
+    <div class="hero-actions">
+      <a href="#quote" class="btn-red">Get a Free Quote</a>
+      <a href="#packages" class="btn-ghost">View Packages</a>
+    </div>
+    <div class="hero-car"></div>
+  </div>
+</section>
+
+<div class="stat-strip">
+  <div class="wrap stat-grid">
+    <div><div class="stat-num">3,200+</div><div class="stat-label">Cars detailed</div></div>
+    <div><div class="stat-num">8</div><div class="stat-label">Years in business</div></div>
+    <div><div class="stat-num">5.0★</div><div class="stat-label">Average rating</div></div>
+    <div><div class="stat-num">100%</div><div class="stat-label">Satisfaction guarantee</div></div>
+  </div>
+</div>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What We Do</div>
+      <h2>Our Services</h2>
+      <p>From a quick refresh to a full paint correction — every job finished to the same standard.</p>
+    </div>
+  </div>
+  <div class="wrap" style="padding:0;">
+    <div class="service-grid">
+      <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 12h18M3 12l3-6h12l3 6M3 12v6h18v-6"/></svg><h3>Exterior Detailing</h3><p>Hand wash, clay bar treatment, and paint decontamination for a flawless shell.</p></div>
+      <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 10h8M8 14h5"/></svg><h3>Interior Detailing</h3><p>Deep vacuum, steam cleaning, leather conditioning, and odour elimination.</p></div>
+      <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1 3-6Z"/></svg><h3>Ceramic Coating</h3><p>Multi-year protection with a deep, glass-like gloss that repels dirt and water.</p></div>
+      <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg><h3>Paint Correction</h3><p>Multi-stage machine polishing to remove swirls, scratches, and oxidation.</p></div>
+      <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 9v11"/></svg><h3>Machine Polishing</h3><p>Restore depth and clarity to tired paintwork with precision machine polishing.</p></div>
+      <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 12l5 5L20 6"/></svg><h3>Full Detail Packages</h3><p>Complete interior + exterior packages — see our three tiers below.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="packages" style="background:var(--black-soft)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Pricing</div>
+      <h2>Detail Packages</h2>
+    </div>
+    <div class="package-grid">
+      <div class="package-card">
+        <h3>Essential</h3>
+        <div class="package-price">$149</div>
+        <ul><li>Hand wash &amp; dry</li><li>Interior vacuum</li><li>Tyre shine</li><li>Window clean</li></ul>
+        <a href="#quote" class="btn-ghost" style="width:100%; text-align:center;">Get a Quote</a>
+      </div>
+      <div class="package-card popular">
+        <div class="popular-tag">Most Popular</div>
+        <h3>Signature</h3>
+        <div class="package-price">$289</div>
+        <ul><li>Everything in Essential</li><li>Clay bar &amp; decontamination</li><li>Interior steam clean</li><li>Machine wax</li></ul>
+        <a href="#quote" class="btn-red" style="width:100%; text-align:center; display:block;">Get a Quote</a>
+      </div>
+      <div class="package-card">
+        <h3>Apex Ultimate</h3>
+        <div class="package-price">$549</div>
+        <ul><li>Everything in Signature</li><li>Full paint correction</li><li>Ceramic coating (2yr)</li><li>Leather conditioning</li></ul>
+        <a href="#quote" class="btn-ghost" style="width:100%; text-align:center;">Get a Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How It Works</div>
+      <h2>Our Process</h2>
+    </div>
+    <div class="process-row">
+      <div class="process-step"><div class="process-num">1</div><h3>Book Online</h3><p>Request a quote and pick a slot that suits you.</p></div>
+      <div class="process-step"><div class="process-num">2</div><h3>Drop Off</h3><p>Bring your car in, or ask about our mobile service.</p></div>
+      <div class="process-step"><div class="process-num">3</div><h3>We Detail</h3><p>Our team gets to work with premium products and tools.</p></div>
+      <div class="process-step"><div class="process-num">4</div><h3>Drive Away</h3><p>Collect your car looking better than the day you bought it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="gallery" style="background:var(--black-soft)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Real Results</div>
+      <h2>Before &amp; After</h2>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-card"><div class="half before">Before</div><div class="half after">After</div></div>
+      <div class="ba-card"><div class="half before">Before</div><div class="half after">After</div></div>
+      <div class="ba-card"><div class="half before">Before</div><div class="half after">After</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Why Choose Us</div>
+      <h2>What Customers Say</h2>
+    </div>
+    <div class="review-grid">
+      <div class="review-card"><div class="stars">★★★★★</div><p>"The ceramic coating made my black car look like it just left the showroom. Two years later, water still beads right off."</p><div>— Marcus D.</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p>"Paint correction removed swirl marks I thought were permanent. Genuinely stunned by the finish."</p><div>— Priya S.</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p>"Booked the Signature package for a family car with three kids. Interior looks brand new again."</p><div>— Jake R.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="contact" style="background:var(--black-soft)">
+  <div class="wrap contact-split">
+    <div>
+      <div class="eyebrow">Opening Hours</div>
+      <h2 style="font-size:2rem; margin-bottom:20px;">When We're Open</h2>
+      <div class="hours-row"><span>Monday – Saturday</span><span>8:00 – 18:00</span></div>
+      <div class="hours-row"><span>Sunday</span><span>Closed</span></div>
+    </div>
+    <div>
+      <div class="eyebrow">Get In Touch</div>
+      <h2 style="font-size:2rem; margin-bottom:20px;">Contact</h2>
+      <p style="margin-bottom:10px; color:var(--silver);">📍 890 Industrial Way, Unit 4</p>
+      <p style="margin-bottom:10px; color:var(--silver);">📞 (555) 041-2290</p>
+      <p style="margin-bottom:24px; color:var(--silver);">✉ quotes@apexautodetailing.example</p>
+      <a href="#quote" class="btn-red">Get a Free Quote</a>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="quote" style="text-align:center;">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align:center;">Ready To Get Started?</div>
+    <h2 style="font-size:clamp(1.9rem,3.6vw,2.7rem); margin-bottom:18px;">Get Your Free Quote Today</h2>
+    <p style="color:var(--silver); max-width:480px; margin:0 auto 30px;">Tell us your car's make and model and the finish you're after, and we'll send a quote within one working day.</p>
+    <a href="#top" class="btn-red">Get a Free Quote</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div><h4 style="color:var(--white)">Apex Auto Detailing</h4><p>890 Industrial Way, Unit 4. Precision car care for people who care about their cars.</p></div>
+    <div><h4>Explore</h4><a href="#services">Services</a><a href="#packages">Packages</a><a href="#gallery">Gallery</a><a href="#reviews">Reviews</a></div>
+    <div><h4>Contact</h4><a href="tel:+15550412290">(555) 041-2290</a><a href="mailto:quotes@apexautodetailing.example">quotes@apexautodetailing.example</a></div>
+    <div><h4>Follow</h4><a href="#">Instagram</a><a href="#">Facebook</a></div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 Apex Auto Detailing. All rights reserved.</span>
+    <span>Concept website by Gilmour Stellini</span>
+  </div>
+</footer>
+
+<script>(function(){var framed=window.top!==window.self;document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a');if(!a)return;var h=a.getAttribute('href')||'';e.preventDefault();if(h.charAt(0)==='#'){var t=h.length>1?document.getElementById(h.slice(1)):null;if(t)t.scrollIntoView({behavior:'smooth'});else window.scrollTo({top:0,behavior:'smooth'});}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);window.addEventListener('message',function(e){var d=e.data||{};if(!d.gsScroll)return;var el=document.querySelector(d.gsScroll);if(!el)return;document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,el.getBoundingClientRect().top+window.pageYOffset-(d.gsOffset||0));});if(!framed){var b=document.createElement('a');b.href='/portfolio/apex-auto-detailing/';b.textContent='Concept website by Gilmour Stellini → back to case study';b.setAttribute('style','position:fixed;left:16px;bottom:16px;z-index:9999;background:#0E1522;color:#F4F5F2;font:600 13px/1.2 system-ui,sans-serif;padding:10px 14px;border-radius:999px;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.3)');b.addEventListener('click',function(e){e.stopPropagation();},true);document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(b);});window.addEventListener('click',function(e){if(e.target===b){window.location.href=b.href;}},true);}})();</script></body>
+</html>

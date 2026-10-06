@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voltline Electrical — Licensed Local Electricians</title>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<style>
+  :root{
+    --navy:#0F2A4A; --navy-deep:#091B32; --amber:#FFC72C; --amber-dark:#E0A800;
+    --bg:#F5F7FA; --ink:#1B2A3C; --gray:#5C6B7A; --line:rgba(15,42,74,0.12); --green:#1E9E5A;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{ scroll-behavior:smooth; }
+  body{ font-family:'Manrope',sans-serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  h1,h2,h3{ font-weight:800; letter-spacing:-0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+  @media (max-width:640px){ .wrap{ padding:0 20px; } }
+  .section{ padding:96px 0; }
+  .section.tight{ padding:64px 0; }
+  .eyebrow{ color:var(--navy); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; font-size:0.8rem; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  .eyebrow::before{ content:'⚡'; }
+  .section-head{ max-width:620px; margin-bottom:50px; }
+  .section-head h2{ font-size:clamp(2rem,4vw,2.7rem); margin-bottom:14px; }
+  .section-head p{ color:var(--gray); font-size:1.05rem; }
+  .btn-amber{ background:var(--amber); color:var(--navy-deep); padding:16px 32px; border-radius:8px; font-weight:800; font-size:0.95rem; display:inline-block; transition:background .2s, transform .2s; }
+  .btn-amber:hover{ background:var(--amber-dark); transform:translateY(-2px); }
+  .btn-navy{ background:var(--navy); color:#fff; padding:15px 30px; border-radius:8px; font-weight:700; font-size:0.92rem; display:inline-block; transition:background .2s; }
+  .btn-navy:hover{ background:var(--navy-deep); }
+  .btn-outline{ border:1.5px solid var(--navy); color:var(--navy); padding:14px 28px; border-radius:8px; font-weight:700; font-size:0.9rem; display:inline-block; }
+
+  .top-bar{ background:var(--navy-deep); color:#cdd8e5; padding:9px 0; font-size:0.85rem; }
+  .top-bar .wrap{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .top-bar a{ font-weight:600; color:#fff; }
+
+  header{ position:sticky; top:0; z-index:100; background:rgba(245,247,250,0.95); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .navbar{ display:flex; align-items:center; justify-content:space-between; padding:18px 32px; }
+  .logo{ font-weight:800; font-size:1.25rem; display:flex; align-items:center; gap:10px; color:var(--navy); }
+  .nav-links{ display:flex; gap:30px; align-items:center; }
+  .nav-links a:not(.btn-amber){ font-size:0.92rem; font-weight:600; color:var(--ink); }
+  .nav-links a:not(.btn-amber):hover{ color:var(--navy); }
+  .menu-toggle{ display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; padding:6px; }
+  .menu-toggle span{ width:22px; height:2px; background:var(--navy); }
+  .mobile-panel{ display:none; flex-direction:column; padding:8px 32px 20px; }
+  .mobile-panel a{ padding:12px 0; border-bottom:1px solid var(--line); font-weight:600; }
+  .mobile-panel.open{ display:flex; }
+  @media (max-width:900px){ .nav-links{ display:none; } .menu-toggle{ display:flex; } }
+
+  .hero{ background:linear-gradient(155deg, var(--navy) 0%, var(--navy-deep) 100%); color:#fff; padding:90px 0 80px; position:relative; overflow:hidden; }
+  .hero::after{ content:''; position:absolute; right:-100px; top:-100px; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle, rgba(255,199,44,0.14), transparent 70%); }
+  .hero-grid{ position:relative; z-index:1; display:grid; grid-template-columns:1.1fr 0.9fr; gap:50px; align-items:center; }
+  .trust-badges{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:22px; }
+  .badge{ background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); padding:7px 14px; border-radius:100px; font-size:0.8rem; font-weight:600; }
+  .hero h1{ font-size:clamp(2.4rem,5.4vw,3.8rem); line-height:1.08; margin-bottom:20px; }
+  .hero h1 span{ color:var(--amber); }
+  .hero p.lede{ color:#C4D2E2; font-size:1.1rem; max-width:460px; margin-bottom:30px; }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; }
+  .emergency-card{ background:#fff; color:var(--navy-deep); border-radius:14px; padding:30px; box-shadow:0 30px 60px rgba(0,0,0,0.3); }
+  .emergency-card .tag{ display:inline-block; background:rgba(225,60,0,0.1); color:#C23B00; font-weight:700; font-size:0.78rem; padding:5px 12px; border-radius:100px; margin-bottom:14px; text-transform:uppercase; letter-spacing:0.05em; }
+  .emergency-card h3{ font-size:1.3rem; margin-bottom:8px; }
+  .emergency-card p{ color:var(--gray); font-size:0.92rem; margin-bottom:18px; }
+  .emergency-phone{ font-size:1.5rem; font-weight:800; color:var(--navy); }
+  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
+
+  .service-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+  .service-card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:28px 24px; transition:transform .2s, box-shadow .2s; }
+  .service-card:hover{ transform:translateY(-4px); box-shadow:0 20px 40px -20px rgba(15,42,74,0.25); }
+  .service-icon{ width:44px; height:44px; background:rgba(255,199,44,0.16); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:16px; color:var(--navy); }
+  .service-card h3{ font-size:1.05rem; margin-bottom:8px; }
+  .service-card p{ font-size:0.88rem; color:var(--gray); }
+  @media (max-width:960px){ .service-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .service-grid{ grid-template-columns:1fr; } }
+
+  .why-split{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+  .why-list{ list-style:none; }
+  .why-list li{ display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--line); }
+  .why-list .check{ width:26px; height:26px; border-radius:50%; background:var(--green); color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:0.8rem; }
+  .stat-box-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .stat-box{ background:var(--navy); color:#fff; border-radius:14px; padding:26px; text-align:center; }
+  .stat-box .num{ font-size:2rem; font-weight:800; color:var(--amber); }
+  .stat-box .label{ font-size:0.85rem; color:#C4D2E2; margin-top:4px; }
+  @media (max-width:860px){ .why-split{ grid-template-columns:1fr; gap:36px; } }
+
+  .cert-row{ display:flex; gap:20px; flex-wrap:wrap; justify-content:center; }
+  .cert-pill{ background:#fff; border:1px solid var(--line); padding:14px 24px; border-radius:10px; font-weight:700; font-size:0.9rem; color:var(--navy); }
+
+  .areas-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .area-pill{ background:#fff; border:1px solid var(--line); padding:14px; border-radius:10px; text-align:center; font-weight:600; font-size:0.92rem; }
+  @media (max-width:760px){ .areas-grid{ grid-template-columns:repeat(2,1fr); } }
+
+  .review-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .review-card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:26px; }
+  .stars{ color:var(--amber); margin-bottom:12px; letter-spacing:2px; }
+  .review-card p{ color:var(--gray); font-size:0.94rem; margin-bottom:14px; }
+  @media (max-width:860px){ .review-grid{ grid-template-columns:1fr; } }
+
+  .faq-list{ max-width:760px; margin:0 auto; }
+  .faq-item{ border-bottom:1px solid var(--line); padding:18px 0; }
+  .faq-item summary{ cursor:pointer; font-weight:700; display:flex; justify-content:space-between; align-items:center; list-style:none; gap:12px; }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{ content:'+'; color:var(--navy); font-size:1.3rem; flex:none; }
+  .faq-item[open] summary::after{ content:'–'; }
+  .faq-item p{ margin-top:10px; color:var(--gray); font-size:0.94rem; }
+
+  .contact-split{ display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+  .hours-row{ display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--line); }
+  .hours-row span:first-child{ color:var(--gray); }
+  @media (max-width:860px){ .contact-split{ grid-template-columns:1fr; gap:36px; } }
+
+  footer{ background:var(--navy-deep); color:#C4D2E2; padding:56px 0 28px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px; }
+  .footer-grid h4{ color:#fff; font-size:0.95rem; margin-bottom:14px; }
+  .footer-grid a, .footer-grid p{ display:block; color:#A9BBCE; font-size:0.9rem; margin-bottom:10px; }
+  .footer-bottom{ border-top:1px solid rgba(255,255,255,0.12); padding-top:22px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:0.8rem; color:#8FA3B8; }
+  @media (max-width:760px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
+.hero{background:linear-gradient(100deg,rgba(9,27,50,.97) 0%,rgba(15,42,74,.9) 50%,rgba(15,42,74,.6) 100%),url("/assets/img/stock/b9460c65d8fa.webp") center/cover,linear-gradient(155deg,#0F2A4A,#091B32)!important}.service-card{overflow:hidden}.service-card::before{content:"";display:block;height:130px;margin:-28px -24px 18px;background-position:center;background-size:cover}.service-card:nth-child(1)::before{background-image:url("/assets/img/stock/980f8c1f8344.webp")}.service-card:nth-child(2)::before{background-image:url("/assets/img/stock/abf2ed53f926.webp")}.service-card:nth-child(3)::before{background-image:url("/assets/img/stock/bf31ef76c4a6.webp")}.service-card:nth-child(4)::before{background-image:url("/assets/img/stock/1f3d0a3ef35d.webp")}.service-card:nth-child(5)::before{background-image:url("/assets/img/stock/7f8f86412d11.webp")}.service-card:nth-child(6)::before{background-image:url("/assets/img/stock/f393b5bb57ca.webp")}.service-card:nth-child(7)::before{background-image:url("/assets/img/stock/61a193546f68.webp")}.service-card:nth-child(8)::before{background-image:url("/assets/img/stock/59876cefed44.webp")}#quote{background:linear-gradient(rgba(15,42,74,.9),rgba(15,42,74,.94)),url("/assets/img/stock/296ab51dc6b9.webp") center/cover,#0F2A4A!important}#why .stat-box:nth-child(4){background:linear-gradient(rgba(15,42,74,.78),rgba(15,42,74,.88)),url("/assets/img/stock/6d03efd68237.webp") center/cover}</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="wrap">
+    <span>Licensed &amp; insured · Serving the Greater Metro Area</span>
+    <a href="tel:+15550138800">24/7 Emergency: (555) 013-8800</a>
+  </div>
+</div>
+
+<header>
+  <div class="navbar">
+    <a href="#top" class="logo">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8Z" fill="#FFC72C"/></svg>
+      Voltline Electrical
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#why">Why Us</a>
+      <a href="#areas">Areas Served</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <a href="#quote" class="btn-amber">Request a Quote</a>
+    </nav>
+    <button class="menu-toggle" onclick="document.getElementById('mp').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-panel" id="mp">
+    <a href="#services">Services</a>
+    <a href="#why">Why Us</a>
+    <a href="#areas">Areas Served</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <a href="#quote">Request a Quote</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="trust-badges">
+        <span class="badge">✓ Licensed</span>
+        <span class="badge">✓ Insured</span>
+        <span class="badge">✓ 24/7 Emergency</span>
+      </div>
+      <h1>Electrical work done <span>right</span>, the first time.</h1>
+      <p class="lede">From a single fuse box swap to a full rewire — Voltline's licensed electricians handle it safely, on time, and without the upsell.</p>
+      <div class="hero-actions">
+        <a href="#quote" class="btn-amber">Request a Free Quote</a>
+        <a href="tel:+15550138800" class="btn-outline" style="color:#fff; border-color:rgba(255,255,255,0.4);">Call Now</a>
+      </div>
+    </div>
+    <div class="emergency-card">
+      <span class="tag">24/7 Emergency Callout</span>
+      <h3>Power out? Sparking outlet?</h3>
+      <p>Don't wait — our emergency electricians are on call around the clock for genuine electrical emergencies.</p>
+      <a href="tel:+15550138800" class="emergency-phone">📞 (555) 013-8800</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What We Do</div>
+      <h2>Our Services</h2>
+      <p>Residential and commercial electrical work, all fully licensed and up to code.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card"><div class="service-icon">🏠</div><h3>Residential Electrical</h3><p>Wiring, outlets, and repairs for homes of any age.</p></div>
+      <div class="service-card"><div class="service-icon">🏢</div><h3>Commercial Electrical</h3><p>Office and retail electrical fit-outs and maintenance.</p></div>
+      <div class="service-card"><div class="service-icon">🔌</div><h3>Rewiring</h3><p>Full or partial rewires for older properties.</p></div>
+      <div class="service-card"><div class="service-icon">💡</div><h3>Lighting</h3><p>Indoor, outdoor, and smart lighting installation.</p></div>
+      <div class="service-card"><div class="service-icon">⚡</div><h3>Fuse Boards</h3><p>Consumer unit upgrades and safety compliance.</p></div>
+      <div class="service-card"><div class="service-icon">🔋</div><h3>EV Charger Install</h3><p>Home and workplace EV charging point installation.</p></div>
+      <div class="service-card"><div class="service-icon">🔍</div><h3>Fault Finding</h3><p>Diagnosing tripped breakers, flickering lights, and dead circuits.</p></div>
+      <div class="service-card"><div class="service-icon">📋</div><h3>Electrical Inspections</h3><p>Full safety inspections and certification reports.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="why" style="background:#fff">
+  <div class="wrap">
+    <div class="why-split">
+      <div>
+        <div class="eyebrow">Why Choose Voltline</div>
+        <h2 style="font-size:2rem; margin-bottom:20px;">Electricians you can actually trust</h2>
+        <ul class="why-list">
+          <li><span class="check">✓</span><span>Fully licensed &amp; insured electricians on every job</span></li>
+          <li><span class="check">✓</span><span>Upfront, honest pricing — no surprise call-out fees</span></li>
+          <li><span class="check">✓</span><span>Same-day emergency callouts available</span></li>
+          <li><span class="check">✓</span><span>All work certified and code-compliant</span></li>
+        </ul>
+      </div>
+      <div class="stat-box-grid">
+        <div class="stat-box"><div class="num">18+</div><div class="label">Years experience</div></div>
+        <div class="stat-box"><div class="num">4,500+</div><div class="label">Jobs completed</div></div>
+        <div class="stat-box"><div class="num">4.9★</div><div class="label">Average rating</div></div>
+        <div class="stat-box"><div class="num">24/7</div><div class="label">Emergency callouts</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight">
+  <div class="wrap">
+    <div class="section-head" style="margin:0 auto 30px; text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">Qualifications</div>
+      <h2>Certified &amp; Compliant</h2>
+    </div>
+    <div class="cert-row">
+      <div class="cert-pill">Master Electrician Licensed</div>
+      <div class="cert-pill">Fully Insured — $2M Liability</div>
+      <div class="cert-pill">NICEIC Approved</div>
+      <div class="cert-pill">EV Charger Certified Installer</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="areas" style="background:#fff">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Coverage</div>
+      <h2>Areas We Serve</h2>
+      <p>Based centrally, covering the whole Greater Metro Area.</p>
+    </div>
+    <div class="areas-grid">
+      <div class="area-pill">Downtown</div>
+      <div class="area-pill">Riverside</div>
+      <div class="area-pill">Northgate</div>
+      <div class="area-pill">Fairview</div>
+      <div class="area-pill">Oak Park</div>
+      <div class="area-pill">Millbrook</div>
+      <div class="area-pill">Eastwood</div>
+      <div class="area-pill">Harborview</div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Customer Reviews</div>
+      <h2>What People Say</h2>
+    </div>
+    <div class="review-grid">
+      <div class="review-card"><div class="stars">★★★★★</div><p>"Called with a tripped breaker at 9pm, someone was at my door within the hour. Fixed and explained everything clearly."</p><div style="font-weight:700">— Karen M.</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p>"Full rewire on our 1960s house. Tidy work, fair price, and they left the place cleaner than they found it."</p><div style="font-weight:700">— Tom B.</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p>"Installed our EV charger in half a day. Professional from the quote through to the certificate."</p><div style="font-weight:700">— Aisha R.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="faq" style="background:#fff">
+  <div class="wrap">
+    <div class="section-head" style="margin:0 auto 40px; text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">Questions</div>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item"><summary>Are your electricians licensed?</summary><p>Yes — every electrician on our team is fully licensed, insured, and NICEIC approved.</p></details>
+      <details class="faq-item"><summary>Do you offer emergency callouts?</summary><p>Yes, 24/7 for genuine electrical emergencies such as power loss, sparking outlets, or exposed wiring.</p></details>
+      <details class="faq-item"><summary>Do you provide free quotes?</summary><p>Yes — most jobs get a free, no-obligation quote before any work begins.</p></details>
+      <details class="faq-item"><summary>What areas do you cover?</summary><p>We cover the full Greater Metro Area — see our Areas Served section above.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap contact-split">
+    <div>
+      <div class="eyebrow">Opening Hours</div>
+      <h2 style="font-size:2rem; margin-bottom:20px;">Office Hours</h2>
+      <div class="hours-row"><span>Monday – Friday</span><span>7:00 – 18:00</span></div>
+      <div class="hours-row"><span>Saturday</span><span>8:00 – 14:00</span></div>
+      <div class="hours-row"><span>Emergency Callouts</span><span>24/7</span></div>
+    </div>
+    <div>
+      <div class="eyebrow">Get In Touch</div>
+      <h2 style="font-size:2rem; margin-bottom:20px;">Contact</h2>
+      <p style="margin-bottom:10px; color:var(--gray);">📍 55 Industrial Park Road</p>
+      <p style="margin-bottom:10px; color:var(--gray);">📞 (555) 013-8800</p>
+      <p style="margin-bottom:24px; color:var(--gray);">✉ quotes@voltlineelectrical.example</p>
+      <a href="#quote" class="btn-amber">Request a Free Quote</a>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="quote" style="background:var(--navy); color:#fff; text-align:center;">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center; color:var(--amber);">Ready To Get Started?</div>
+    <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem); margin-bottom:18px; color:#fff;">Request Your Free Quote</h2>
+    <p style="color:#C4D2E2; max-width:480px; margin:0 auto 30px;">Tell us about the job and we'll come back with a clear, fixed quote before any work starts.</p>
+    <a href="#top" class="btn-amber">Request a Free Quote</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div><h4>Voltline Electrical</h4><p>55 Industrial Park Road. Licensed electricians serving the Greater Metro Area since 2008.</p></div>
+    <div><h4>Explore</h4><a href="#services">Services</a><a href="#why">Why Us</a><a href="#areas">Areas Served</a><a href="#faq">FAQ</a></div>
+    <div><h4>Contact</h4><a href="tel:+15550138800">(555) 013-8800</a><a href="mailto:quotes@voltlineelectrical.example">quotes@voltlineelectrical.example</a></div>
+    <div><h4>Hours</h4><p>Mon–Fri 7:00–18:00</p><p>Emergency: 24/7</p></div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 Voltline Electrical. All rights reserved.</span>
+    <span>Concept website by Gilmour Stellini</span>
+  </div>
+</footer>
+
+<script>(function(){var framed=window.top!==window.self;document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a');if(!a)return;var h=a.getAttribute('href')||'';e.preventDefault();if(h.charAt(0)==='#'){var t=h.length>1?document.getElementById(h.slice(1)):null;if(t)t.scrollIntoView({behavior:'smooth'});else window.scrollTo({top:0,behavior:'smooth'});}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);window.addEventListener('message',function(e){var d=e.data||{};if(!d.gsScroll)return;var el=document.querySelector(d.gsScroll);if(!el)return;document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,el.getBoundingClientRect().top+window.pageYOffset-(d.gsOffset||0));});if(!framed){var b=document.createElement('a');b.href='/portfolio/voltline-electrical/';b.textContent='Concept website by Gilmour Stellini → back to case study';b.setAttribute('style','position:fixed;left:16px;bottom:16px;z-index:9999;background:#0E1522;color:#F4F5F2;font:600 13px/1.2 system-ui,sans-serif;padding:10px 14px;border-radius:999px;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.3)');b.addEventListener('click',function(e){e.stopPropagation();},true);document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(b);});window.addEventListener('click',function(e){if(e.target===b){window.location.href=b.href;}},true);}})();</script></body>
+</html>

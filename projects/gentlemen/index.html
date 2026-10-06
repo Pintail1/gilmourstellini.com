@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Gentlemen's Cut — Premium Barbershop</title>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<style>
+  :root{
+    --ink:#151513; --ink-deep:#0D0C0B; --panel:#1F1D1A;
+    --gold:#C9A227; --gold-light:#E4C846; --gold-soft:#D9B94A;
+    --cream:#F3EDE4; --cream-dim:#B9B2A4; --line:rgba(243,237,228,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ font-family:'Inter',sans-serif; background:var(--ink); color:var(--cream); line-height:1.6; }
+  h1,h2,h3,.display{ font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:0.02em; }
+  a{ color:inherit; text-decoration:none; }
+  img,svg{ display:block; max-width:100%; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+  @media (max-width:640px){ .wrap{ padding:0 20px; } }
+  .section{ padding:100px 0; }
+  .section.tight{ padding:70px 0; }
+  .eyebrow{ color:var(--gold); font-weight:700; letter-spacing:0.18em; text-transform:uppercase; font-size:0.8rem; margin-bottom:16px; display:flex; align-items:center; gap:12px; }
+  .eyebrow::before{ content:''; width:30px; height:2px; background:var(--gold); }
+  .section-head{ max-width:600px; margin-bottom:56px; }
+  .section-head h2{ font-size:clamp(2rem,4vw,2.8rem); margin-bottom:14px; color:var(--cream); }
+  .section-head p{ color:var(--cream-dim); font-size:1.05rem; }
+  .btn-gold{
+    background:var(--gold); color:var(--ink-deep); padding:16px 34px; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.08em; font-size:0.88rem; border-radius:2px; display:inline-block; transition:background .2s, transform .2s;
+    border:1px solid var(--gold);
+  }
+  .btn-gold:hover{ background:transparent; color:var(--gold); transform:translateY(-2px); }
+  .btn-outline{
+    border:1px solid var(--line); color:var(--cream); padding:15px 32px; text-transform:uppercase; letter-spacing:0.08em;
+    font-size:0.85rem; font-weight:600; display:inline-block; transition:border-color .2s, color .2s;
+  }
+  .btn-outline:hover{ border-color:var(--gold); color:var(--gold); }
+
+  /* nav */
+  header{ position:sticky; top:0; z-index:100; background:rgba(21,21,19,0.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .navbar{ display:flex; align-items:center; justify-content:space-between; padding:22px 32px; }
+  .logo{ font-family:'Oswald',sans-serif; font-weight:700; font-size:1.3rem; letter-spacing:0.08em; display:flex; align-items:center; gap:12px; }
+  .logo-mark{ width:34px; height:34px; }
+  .nav-links{ display:flex; gap:36px; align-items:center; }
+  .nav-links a{ font-size:0.85rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:600; color:var(--cream-dim); transition:color .2s; }
+  .nav-links a:hover{ color:var(--gold); }
+  .menu-toggle{ display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; padding:8px; }
+  .menu-toggle span{ width:24px; height:2px; background:var(--cream); }
+  .mobile-panel{ display:none; flex-direction:column; padding:10px 32px 24px; gap:4px; border-bottom:1px solid var(--line); }
+  .mobile-panel a{ padding:12px 0; text-transform:uppercase; letter-spacing:0.08em; font-size:0.9rem; font-weight:600; border-bottom:1px solid var(--line); }
+  .mobile-panel.open{ display:flex; }
+  @media (max-width:860px){ .nav-links{ display:none; } .menu-toggle{ display:flex; } }
+
+  /* hero */
+  .hero{ position:relative; padding:120px 0 100px; overflow:hidden; background:
+    radial-gradient(circle at 85% 20%, rgba(201,162,39,0.14), transparent 45%),
+    linear-gradient(180deg, var(--ink) 0%, var(--ink-deep) 100%); }
+  .hero-grid{ display:grid; grid-template-columns:1.2fr 0.8fr; gap:50px; align-items:center; }
+  .hero h1{ font-size:clamp(2.6rem,6vw,4.6rem); line-height:1.02; margin-bottom:24px; }
+  .hero h1 em{ font-style:normal; color:var(--gold); }
+  .hero p.lede{ color:var(--cream-dim); font-size:1.15rem; max-width:460px; margin-bottom:36px; }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; }
+  .hero-visual{ position:relative; height:420px; display:flex; align-items:center; justify-content:center; }
+  .barber-pole{ width:110px; height:340px; border-radius:60px; overflow:hidden; position:relative; box-shadow:0 30px 60px rgba(0,0,0,0.5); }
+  .barber-pole::before{
+    content:''; position:absolute; inset:0;
+    background:repeating-linear-gradient(45deg, #B5342E 0 26px, var(--cream) 26px 52px, var(--ink) 52px 78px);
+    animation:spin 3s linear infinite;
+  }
+  @keyframes spin{ from{ background-position:0 0; } to{ background-position:0 156px; } }
+  .hero-ring{ position:absolute; width:320px; height:320px; border:1px solid var(--line); border-radius:50%; }
+  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } .hero-visual{ height:260px; } .barber-pole{ width:80px; height:240px; } .hero-ring{ width:220px; height:220px; } }
+
+  /* stat strip */
+  .stat-strip{ background:var(--panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:32px 0; }
+  .stat-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; text-align:center; }
+  .stat-grid div{ flex:1; min-width:140px; }
+  .stat-num{ font-family:'Oswald',sans-serif; font-size:2.2rem; color:var(--gold); font-weight:700; }
+  .stat-label{ font-size:0.8rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--cream-dim); margin-top:4px; }
+
+  /* services ledger */
+  .ledger{ display:flex; flex-direction:column; }
+  .ledger-item{ display:flex; align-items:baseline; gap:14px; padding:22px 0; border-bottom:1px solid var(--line); }
+  .ledger-item .name{ font-family:'Oswald',sans-serif; font-size:1.15rem; text-transform:uppercase; letter-spacing:0.03em; white-space:nowrap; }
+  .ledger-item .desc{ color:var(--cream-dim); font-size:0.88rem; }
+  .ledger-item .dots{ flex:1; border-bottom:1px dotted var(--line); transform:translateY(-6px); min-width:20px; }
+  .ledger-item .price{ font-family:'Oswald',sans-serif; color:var(--gold); font-size:1.15rem; white-space:nowrap; }
+  .ledger-col-head{ display:flex; flex-direction:column; }
+
+  .services-grid{ display:grid; grid-template-columns:1fr 1fr; gap:0 60px; }
+  @media (max-width:860px){ .services-grid{ grid-template-columns:1fr; } .ledger-item .desc{ display:none; } }
+
+  /* barbers */
+  .barber-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .barber-card{ background:var(--panel); border:1px solid var(--line); padding:30px 26px; text-align:center; border-radius:4px; }
+  .barber-avatar{
+    width:96px; height:96px; border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(145deg, var(--gold), #8a6c1a); font-family:'Oswald',sans-serif; font-size:1.7rem; font-weight:700;
+    color:var(--ink-deep); border:3px solid var(--ink);
+  }
+  .barber-card h3{ font-size:1.15rem; margin-bottom:4px; }
+  .barber-card .role{ color:var(--gold); font-size:0.78rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:14px; }
+  .barber-card p{ color:var(--cream-dim); font-size:0.9rem; }
+  @media (max-width:860px){ .barber-grid{ grid-template-columns:1fr; } }
+
+  /* gallery */
+  .gallery-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .gallery-tile{
+    aspect-ratio:1; border-radius:4px; position:relative; overflow:hidden; display:flex; align-items:flex-end; padding:16px;
+    transition:transform .3s;
+  }
+  .gallery-tile:hover{ transform:scale(1.03); }
+  .gallery-tile span{ position:relative; z-index:1; font-family:'Oswald',sans-serif; text-transform:uppercase; font-size:0.8rem; letter-spacing:0.08em; color:var(--cream); }
+  .gallery-tile::before{ content:''; position:absolute; inset:0; opacity:0.9; }
+  .gallery-tile:nth-child(1)::before{ background:linear-gradient(160deg,#2b2620,#151311); }
+  .gallery-tile:nth-child(2)::before{ background:linear-gradient(160deg,#3a2e18,#1a140a); }
+  .gallery-tile:nth-child(3)::before{ background:linear-gradient(160deg,#26201c,#0f0d0b); }
+  .gallery-tile:nth-child(4)::before{ background:linear-gradient(160deg,#332616,#171009); }
+  .gallery-tile:nth-child(5)::before{ background:linear-gradient(160deg,#201d1a,#0c0b0a); }
+  .gallery-tile:nth-child(6)::before{ background:linear-gradient(160deg,#3c2f19,#19130a); }
+  .gallery-tile:nth-child(7)::before{ background:linear-gradient(160deg,#292420,#121110); }
+  .gallery-tile:nth-child(8)::before{ background:linear-gradient(160deg,#362a17,#170f08); }
+  @media (max-width:760px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } }
+
+  /* reviews */
+  .review-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .review-card{ background:var(--panel); border:1px solid var(--line); padding:28px; border-radius:4px; }
+  .stars{ color:var(--gold); letter-spacing:2px; margin-bottom:14px; }
+  .review-card p{ color:var(--cream-dim); font-size:0.95rem; margin-bottom:16px; }
+  .review-who{ font-weight:600; font-size:0.9rem; }
+  @media (max-width:860px){ .review-grid{ grid-template-columns:1fr; } }
+
+  /* hours/contact */
+  .contact-split{ display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+  .hours-row{ display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--line); font-size:0.95rem; }
+  .hours-row span:first-child{ color:var(--cream-dim); }
+  .contact-line{ display:flex; gap:14px; align-items:flex-start; margin-bottom:20px; }
+  .contact-line .ic{ color:var(--gold); font-weight:700; }
+  @media (max-width:860px){ .contact-split{ grid-template-columns:1fr; gap:40px; } }
+
+  /* instagram */
+  .insta-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+  .insta-tile{ aspect-ratio:1; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; color:var(--gold); }
+  .insta-tile:nth-child(odd){ background:var(--panel); }
+  .insta-tile:nth-child(even){ background:#252119; }
+  @media (max-width:760px){ .insta-grid{ grid-template-columns:repeat(3,1fr); } }
+
+  footer{ background:var(--ink-deep); border-top:1px solid var(--line); padding:60px 0 30px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:44px; }
+  .footer-grid h4{ font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:0.08em; font-size:0.9rem; margin-bottom:16px; color:var(--gold); }
+  .footer-grid a, .footer-grid p{ display:block; color:var(--cream-dim); font-size:0.9rem; margin-bottom:10px; }
+  .footer-bottom{ border-top:1px solid var(--line); padding-top:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:0.8rem; color:var(--cream-dim); }
+  @media (max-width:760px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
+.nav-links a.btn-gold{color:var(--ink-deep)}.nav-links a.btn-gold:hover{color:var(--gold)}.gallery-tile::after{content:"";position:absolute;inset:0;background-repeat:no-repeat;background-position:center 40%;background-size:48%;opacity:.9;pointer-events:none}.gallery-tile:nth-child(1)::after{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNDOUEyMjciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjQ0IiBjeT0iODAiIHI9IjExIi8+PGNpcmNsZSBjeD0iNzYiIGN5PSI4MCIgcj0iMTEiLz48cGF0aCBkPSJNNTAgNzEgTDgwIDMwTTcwIDcxIEw0MCAzMCIvPjwvZz48L3N2Zz4=")}.gallery-tile:nth-child(2)::after{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNDOUEyMjciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0zOCA3MGg0NHYxMEgzOHpNNDIgNzBWNDZhNiA2IDAgMCAxIDYtNmgyNGE2IDYgMCAwIDEgNiA2djI0TTYwIDgwdjE0TTQ2IDk2aDI4TTM0IDU4aDhNNzggNThoOCIvPjwvZz48L3N2Zz4=")}.gallery-tile:nth-child(3)::after{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNDOUEyMjciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0zNiA3NmwzNC0zNCAxMiAxMi0zNCAzNHpNNzAgNDJsOC04IDEyIDEyLTggOE00MiA4MmwtNiA2Ii8+PHBhdGggZD0iTTUyIDY2bDEwLTEwIi8+PC9nPjwvc3ZnPg==")}.gallery-tile:nth-child(4)::after{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNDOUEyMjciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxyZWN0IHg9IjMwIiB5PSI1MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjEyIiByeD0iMyIvPjxwYXRoIGQ9Ik0zNiA2MnYxNE00NCA2MnYxNE01MiA2MnYxNE02MCA2MnYxNE02OCA2MnYxNE03NiA2MnYxNE04NCA2MnYxNCIvPjwvZz48L3N2Zz4=")}.gallery-tile:nth-child(5)::after{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNDOUEyMjciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxyZWN0IHg9IjQ0IiB5PSIzMCIgd2lkdGg9IjMyIiBoZWlnaHQ9IjYwIiByeD0iMTAiLz48cGF0aCBkPSJNNDggMzB2LTZNNTQgMzB2LTZNNjAgMzB2LTZNNjYgMzB2LTZNNzIgMzB2LTZNNTIgNzZoMTYiLz48L2c+PC9zdmc+")}.gallery-tile:nth-child(6)::after{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNDOUEyMjciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxyZWN0IHg9IjUwIiB5PSIyOCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjY0IiByeD0iMTAiLz48cGF0aCBkPSJNNTAgNDRsMjAtMTBNNTAgNTZsMjAtMTBNNTAgNjhsMjAtMTBNNTAgODBsMjAtMTBNNDYgMjRoMjhNNDYgOTZoMjgiLz48L2c+PC9zdmc+")}.gallery-tile:nth-child(7)::after{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNDOUEyMjciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0zNCA3MGMwLTggNTItOCA1MiAwdjEwYzAgOC01MiA4LTUyIDB6TTM0IDcwYzAgOCA1MiA4IDUyIDBNNDggNTRjLTQtNiA0LTEwIDAtMTZNNjAgNTRjLTQtNiA0LTEwIDAtMTZNNzIgNTRjLTQtNiA0LTEwIDAtMTYiLz48L2c+PC9zdmc+")}.gallery-tile:nth-child(8)::after{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNDOUEyMjciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxlbGxpcHNlIGN4PSI2MCIgY3k9IjUyIiByeD0iMjAiIHJ5PSIyNiIvPjxwYXRoIGQ9Ik02MCA3OHYxNE00NiA5NGgyOE00OCA0NGM0LTYgMTAtOCAxNi02Ii8+PC9nPjwvc3ZnPg==")}.insta-tile{font-size:0!important;background-repeat:no-repeat;background-position:center;background-size:62%}.insta-tile:nth-child(1){background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNDOUEyMjciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjQ0IiBjeT0iODAiIHI9IjExIi8+PGNpcmNsZSBjeD0iNzYiIGN5PSI4MCIgcj0iMTEiLz48cGF0aCBkPSJNNTAgNzEgTDgwIDMwTTcwIDcxIEw0MCAzMCIvPjwvZz48L3N2Zz4=")}.insta-tile:nth-child(2){background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNDOUEyMjciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxyZWN0IHg9IjUwIiB5PSIyOCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjY0IiByeD0iMTAiLz48cGF0aCBkPSJNNTAgNDRsMjAtMTBNNTAgNTZsMjAtMTBNNTAgNjhsMjAtMTBNNTAgODBsMjAtMTBNNDYgMjRoMjhNNDYgOTZoMjgiLz48L2c+PC9zdmc+")}.insta-tile:nth-child(3){background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNDOUEyMjciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0zNiA3NmwzNC0zNCAxMiAxMi0zNCAzNHpNNzAgNDJsOC04IDEyIDEyLTggOE00MiA4MmwtNiA2Ii8+PHBhdGggZD0iTTUyIDY2bDEwLTEwIi8+PC9nPjwvc3ZnPg==")}.insta-tile:nth-child(4){background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNDOUEyMjciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxyZWN0IHg9IjMwIiB5PSI1MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjEyIiByeD0iMyIvPjxwYXRoIGQ9Ik0zNiA2MnYxNE00NCA2MnYxNE01MiA2MnYxNE02MCA2MnYxNE02OCA2MnYxNE03NiA2MnYxNE04NCA2MnYxNCIvPjwvZz48L3N2Zz4=")}.insta-tile:nth-child(5){background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNDOUEyMjciIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0zNCA3MGMwLTggNTItOCA1MiAwdjEwYzAgOC01MiA4LTUyIDB6TTM0IDcwYzAgOCA1MiA4IDUyIDBNNDggNTRjLTQtNiA0LTEwIDAtMTZNNjAgNTRjLTQtNiA0LTEwIDAtMTZNNzIgNTRjLTQtNiA0LTEwIDAtMTYiLz48L2c+PC9zdmc+")}.gallery-tile:nth-child(1){background:url("/assets/img/stock/5367dbf566e7.webp") center/cover}.gallery-tile:nth-child(2){background:url("/assets/img/stock/3929f631b969.webp") center/cover}.gallery-tile:nth-child(3){background:url("/assets/img/stock/b1a314cb484f.webp") center/cover}.gallery-tile:nth-child(4){background:url("/assets/img/stock/4764efcb1b6d.webp") center/cover}.gallery-tile:nth-child(5){background:url("/assets/img/stock/008a092ecbe3.webp") center/cover}.gallery-tile:nth-child(6){background:url("/assets/img/stock/0ea36207ea3a.webp") center/cover}.gallery-tile:nth-child(7){background:url("/assets/img/stock/da01ecb8185e.webp") center/cover}.gallery-tile:nth-child(8){background:url("/assets/img/stock/11a593c87767.webp") center/cover}.gallery-tile::before{background:linear-gradient(180deg,transparent 45%,rgba(13,12,11,.88))!important;opacity:1!important}.gallery-tile::after{display:none}.hero{background:linear-gradient(90deg,rgba(13,12,11,.96) 0%,rgba(13,12,11,.82) 55%,rgba(13,12,11,.55) 100%),url("/assets/img/stock/88080e16adaa.webp") center/cover,linear-gradient(180deg,#151513,#0D0C0B)!important}.insta-tile:nth-child(1){background:url("/assets/img/stock/7cd90e85918c.webp") center/cover}.insta-tile:nth-child(2){background:url("/assets/img/stock/ad051dd2ef11.webp") center/cover}.insta-tile:nth-child(3){background:url("/assets/img/stock/3d3f73a859df.webp") center/cover}.insta-tile:nth-child(4){background:url("/assets/img/stock/6a4ee22ac47b.webp") center/cover}.insta-tile:nth-child(5){background:url("/assets/img/stock/a1c8bede2745.webp") center/cover}</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <a href="#top" class="logo">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none"><rect x="17" y="2" width="6" height="36" rx="3" fill="#C9A227"/><circle cx="20" cy="20" r="18" stroke="#C9A227" stroke-width="1.5"/></svg>
+      The Gentlemen's Cut
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#barbers">Barbers</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="#book" class="btn-gold">Book Now</a>
+    </nav>
+    <button class="menu-toggle" onclick="document.getElementById('mp').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-panel" id="mp">
+    <a href="#services">Services</a>
+    <a href="#barbers">Barbers</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="#book">Book Now</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Est. 2014 · Downtown</div>
+      <h1>Sharp cuts.<br>Real <em>craftsmanship.</em></h1>
+      <p class="lede">A traditional barbershop built for the modern gentleman — precision fades, hot towel shaves, and a chair that's always worth the wait.</p>
+      <div class="hero-actions">
+        <a href="#book" class="btn-gold">Book an Appointment</a>
+        <a href="#services" class="btn-outline">View Services</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-ring"></div>
+      <div class="barber-pole"></div>
+    </div>
+  </div>
+</section>
+
+<div class="stat-strip">
+  <div class="wrap stat-grid">
+    <div><div class="stat-num">10+</div><div class="stat-label">Years cutting</div></div>
+    <div><div class="stat-num">6</div><div class="stat-label">Master barbers</div></div>
+    <div><div class="stat-num">15k+</div><div class="stat-label">Cuts delivered</div></div>
+    <div><div class="stat-num">4.9★</div><div class="stat-label">Average rating</div></div>
+  </div>
+</div>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The Menu</div>
+      <h2>Services &amp; Pricing</h2>
+      <p>Every cut starts with a consultation — no rushing, no shortcuts.</p>
+    </div>
+    <div class="services-grid">
+      <div class="ledger">
+        <div class="ledger-item"><span class="name">Signature Haircut</span><span class="dots"></span><span class="price">$38</span></div>
+        <div class="ledger-item"><span class="name">Skin Fade</span><span class="dots"></span><span class="price">$42</span></div>
+        <div class="ledger-item"><span class="name">Beard Trim &amp; Line-up</span><span class="dots"></span><span class="price">$24</span></div>
+        <div class="ledger-item"><span class="name">Hot Towel Shave</span><span class="dots"></span><span class="price">$35</span></div>
+      </div>
+      <div class="ledger">
+        <div class="ledger-item"><span class="name">Cut &amp; Beard Combo</span><span class="dots"></span><span class="price">$55</span></div>
+        <div class="ledger-item"><span class="name">Kids Cut (Under 12)</span><span class="dots"></span><span class="price">$22</span></div>
+        <div class="ledger-item"><span class="name">Grey Blending</span><span class="dots"></span><span class="price">$45</span></div>
+        <div class="ledger-item"><span class="name">The Full Service</span><span class="dots"></span><span class="price">$68</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="barbers" style="background:var(--panel)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Meet The Team</div>
+      <h2>Our Barbers</h2>
+    </div>
+    <div class="barber-grid">
+      <div class="barber-card">
+        <div class="barber-avatar">MR</div>
+        <h3>Marcus Reid</h3>
+        <div class="role">Founder &amp; Master Barber</div>
+        <p>Trained in London, cutting hair for 14 years. Specialises in classic gentleman's cuts.</p>
+      </div>
+      <div class="barber-card">
+        <div class="barber-avatar">JT</div>
+        <h3>Jordan Tate</h3>
+        <div class="role">Senior Barber</div>
+        <p>The fade specialist. If you want it sharp on the sides, Jordan's your man.</p>
+      </div>
+      <div class="barber-card">
+        <div class="barber-avatar">DK</div>
+        <h3>Diego Kaine</h3>
+        <div class="role">Barber &amp; Shave Expert</div>
+        <p>Hot towel shaves and beard sculpting done the old-fashioned way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The Shop Floor</div>
+      <h2>Gallery</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-tile"><span>Fresh Fade</span></div>
+      <div class="gallery-tile"><span>The Chair</span></div>
+      <div class="gallery-tile"><span>Hot Towel</span></div>
+      <div class="gallery-tile"><span>Beard Work</span></div>
+      <div class="gallery-tile"><span>Classic Cut</span></div>
+      <div class="gallery-tile"><span>The Tools</span></div>
+      <div class="gallery-tile"><span>Shop Interior</span></div>
+      <div class="gallery-tile"><span>Finishing Touch</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="reviews" style="background:var(--panel)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Word On The Street</div>
+      <h2>What Our Clients Say</h2>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>"Best fade I've had in years. Marcus takes his time and it shows. Worth the drive across town."</p>
+        <div class="review-who">— Tom H.</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>"The hot towel shave is an experience, not just a service. I come in stressed and leave a new man."</p>
+        <div class="review-who">— Rashid A.</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>"Took my son for his first proper haircut here. Patient, friendly, great with kids too."</p>
+        <div class="review-who">— Daniel P.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap contact-split">
+    <div>
+      <div class="eyebrow">Visit Us</div>
+      <h2 style="font-size:2rem; margin-bottom:24px;">Hours &amp; Location</h2>
+      <div class="hours-row"><span>Monday – Friday</span><span>9:00 – 20:00</span></div>
+      <div class="hours-row"><span>Saturday</span><span>9:00 – 18:00</span></div>
+      <div class="hours-row"><span>Sunday</span><span>Closed</span></div>
+    </div>
+    <div>
+      <div class="eyebrow">Get In Touch</div>
+      <h2 style="font-size:2rem; margin-bottom:24px;">Contact</h2>
+      <div class="contact-line"><span class="ic">📍</span><span>128 Marlowe Street, Downtown</span></div>
+      <div class="contact-line"><span class="ic">📞</span><span>(555) 019-4482</span></div>
+      <div class="contact-line"><span class="ic">✉</span><span>hello@thegentlemenscut.example</span></div>
+      <a href="#book" class="btn-gold" style="margin-top:10px;">Book an Appointment</a>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="book" style="background:var(--panel); text-align:center;">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">Ready When You Are</div>
+    <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem); margin-bottom:20px;">Reserve Your Chair</h2>
+    <p style="color:var(--cream-dim); max-width:480px; margin:0 auto 32px;">Pick your barber and a time that suits you. Walk-ins are welcome whenever a chair is free.</p>
+    <a href="#top" class="btn-gold">Book an Appointment</a>
+  </div>
+</section>
+
+<section class="section tight">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:32px;">
+      <div class="eyebrow">Follow Along</div>
+      <h2>@thegentlemenscut</h2>
+    </div>
+    <div class="insta-grid">
+      <div class="insta-tile">✂</div>
+      <div class="insta-tile">💈</div>
+      <div class="insta-tile">🪒</div>
+      <div class="insta-tile">✂</div>
+      <div class="insta-tile">💈</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <h4 style="color:var(--cream)">The Gentlemen's Cut</h4>
+      <p>128 Marlowe Street, Downtown. A traditional barbershop for the modern gentleman.</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <a href="#services">Services</a>
+      <a href="#barbers">Barbers</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <a href="tel:+15550194482">(555) 019-4482</a>
+      <a href="mailto:hello@thegentlemenscut.example">hello@thegentlemenscut.example</a>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 The Gentlemen's Cut. All rights reserved.</span>
+    <span>Concept website by Gilmour Stellini</span>
+  </div>
+</footer>
+
+<script>(function(){var framed=window.top!==window.self;document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a');if(!a)return;var h=a.getAttribute('href')||'';e.preventDefault();if(h.charAt(0)==='#'){var t=h.length>1?document.getElementById(h.slice(1)):null;if(t)t.scrollIntoView({behavior:'smooth'});else window.scrollTo({top:0,behavior:'smooth'});}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);window.addEventListener('message',function(e){var d=e.data||{};if(!d.gsScroll)return;var el=document.querySelector(d.gsScroll);if(!el)return;document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,el.getBoundingClientRect().top+window.pageYOffset-(d.gsOffset||0));});if(!framed){var b=document.createElement('a');b.href='/portfolio/the-gentlemens-cut/';b.textContent='Concept website by Gilmour Stellini → back to case study';b.setAttribute('style','position:fixed;left:16px;bottom:16px;z-index:9999;background:#0E1522;color:#F4F5F2;font:600 13px/1.2 system-ui,sans-serif;padding:10px 14px;border-radius:999px;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.3)');b.addEventListener('click',function(e){e.stopPropagation();},true);document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(b);});window.addEventListener('click',function(e){if(e.target===b){window.location.href=b.href;}},true);}})();</script></body>
+</html>
