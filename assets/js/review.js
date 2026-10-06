@@ -202,8 +202,27 @@
     $('rqTest').addEventListener('click', function (e) { if (this.getAttribute('aria-disabled') === 'true') e.preventDefault(); });
 
     /* order request: stored with the review link and print-ready QR artwork */
-    $('rqOrder').addEventListener('submit', function (e) {
+    var orderBtn = rqSend;
+    var restoreOrderCooldown = function(){
+      var remaining = Math.max(0, Number(sessionStorage.getItem('gs_order_cooldown') || 0) - Date.now());
+      if (remaining <= 0) {
+        sessionStorage.removeItem('gs_order_cooldown');
+        orderBtn.disabled = false;
+        orderBtn.textContent = 'Send order request';
+        return;
+      }
+      orderBtn.disabled = true;
+      orderBtn.textContent = 'Please wait ' + Math.ceil(remaining / 1000) + 's...';
+      setTimeout(restoreOrderCooldown, 1000);
+    };
+    restoreOrderCooldown();
+    rqOrder.addEventListener('submit', function (e) {
       e.preventDefault();
+      var existingCooldown = Number(sessionStorage.getItem('gs_order_cooldown') || 0);
+      if (existingCooldown > Date.now()) {
+        restoreOrderCooldown();
+        return;
+      }
       var v = function (id) { return $(id).value.trim(); };
       var errs = { name: v('ro-name') ? (v('ro-name').length > 80 ? 'Please keep your name under 80 characters.' : '') : 'Please add your name.',
         email: (/^\S+@\S+\.\S+$/.test(v('ro-email')) && v('ro-email').length <= 150) ? '' : 'Please add an email address.',
@@ -228,7 +247,7 @@
         done.innerHTML = '<h3>Order request ' + ref + ' ' + (sentOnline ? 'sent' : 'ready') + '.</h3><p class="muted">' +
           (sentOnline ? 'I\'ll reply with a proof and quote within one working day.' + (order.logo && !window.GS_ORDER_FILES ? ' Please reply to that email with your logo file so it can go on the print.' : '') : MODE === 'preview' ? 'This is the preview, so nothing was sent. On the live site this request is delivered with your review link and QR artwork.' : 'Your email app should open with the details. If it doesn\'t, email gilmourstellini@icloud.com quoting ' + ref + '.') +
           '</p><p style="margin-top:10px"><button type="button" class="chipbtn" id="rqJson">Download order details</button></p>' + pay;
-        done.hidden = false; btn.textContent = 'Send order request';
+        done.hidden = false; restoreOrderCooldown();
         if (sentOnline) { ['ro-name', 'ro-email', 'ro-phone', 'ro-notes'].forEach(function (id) { $(id).value = ''; }); $('ro-consent').checked = false; } /* clear contact details once sent */
         $('rqJson').addEventListener('click', function () { save(ref + '.json', new Blob([JSON.stringify(order, null, 2)], { type: 'application/json' })); });
       };
@@ -255,7 +274,7 @@
           if (order.logo) { try { var parts = order.logo.dataUrl.split(','), mime = parts[0].split(':')[1].split(';')[0], bin = atob(parts[1]), arr = new Uint8Array(bin.length); for (var k = 0; k < bin.length; k++) arr[k] = bin.charCodeAt(k); fd.append('logo', new Blob([arr], { type: mime }), order.logo.fileName); } catch (er) {} }
         }
         fetch(ORDER_URL, { method: 'POST', headers: { 'Accept': 'application/json' }, body: fd })
-          .then(function (r) { if (!r.ok) throw new Error(r.status); finish(true); })
+          .then(function (r) { if (!r.ok) throw new Error(r.status); sessionStorage.setItem('gs_order_cooldown', String(Date.now() + 30000)); finish(true); })
           .catch(function () { btn.disabled = false; btn.textContent = 'Send order request'; done.hidden = false; done.innerHTML = '<h3>That didn\'t go through.</h3><p class="muted">Please try again, or email gilmourstellini@icloud.com quoting ' + ref + '.</p>'; });
         return;
       }
