@@ -158,7 +158,12 @@
           .then(function(r){ if (!r.ok) throw new Error(r.status); })
           .then(function(){
             sent.innerHTML = '<h3>Thanks, ' + safeName + '. Your enquiry has been sent.</h3><p class="muted">I reply to every enquiry within one working day, by ' + method.toLowerCase() + ' as you asked.</p>';
-            sent.hidden = false; form.reset(); btn.disabled = false; btn.textContent = 'Send enquiry';
+            sent.hidden = false; form.reset();
+            btn.disabled = true; btn.textContent = 'Please wait 30 seconds...';
+            setTimeout(function(){
+              btn.disabled = false;
+              btn.textContent = 'Send enquiry';
+            }, 30000);
           })
           .catch(function(){
             btn.disabled = false; btn.textContent = 'Send enquiry';
