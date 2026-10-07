@@ -160,6 +160,7 @@
             sent.innerHTML = '<h3>Thanks, ' + safeName + '. Your enquiry has been sent.</h3><p class="muted">I reply to every enquiry within one working day, by ' + method.toLowerCase() + ' as you asked.</p>';
             sent.hidden = false; form.reset(); btn.disabled = false; btn.textContent = 'Send enquiry';
           })
+          .finally(function(){ btn.disabled = false; btn.textContent = 'Send enquiry'; })
           .catch(function(){
             btn.disabled = false; btn.textContent = 'Send enquiry';
             sent.innerHTML = '<h3>That didn\'t go through.</h3><p class="muted">Please try again, or email ' + CONTACT_EMAIL + ' directly.</p>';
