@@ -1,4 +1,4 @@
-﻿/* Gilmour Stellini � site behaviour. Works as a multi-page site (GS_MODE="site") and as a single-file preview (GS_MODE="preview"). */
+﻿/* Gilmour Stellini — site behaviour. Works as a multi-page site (GS_MODE="site") and as a single-file preview (GS_MODE="preview"). */
 (function(){
   'use strict';
   var MODE = window.GS_MODE || 'site';
@@ -126,27 +126,8 @@
   if (form) {
     var q = new URLSearchParams(location.search);
     if (q.get('service')) { var opt = form.service.querySelector('option[value="' + q.get('service') + '"]'); if (opt) form.service.value = q.get('service'); }
-    var contactBtn = form.querySelector('button[type="submit"]');
-    var restoreContactCooldown = function(){
-      var remaining = Math.max(0, Number(sessionStorage.getItem('gs_contact_cooldown') || 0) - Date.now());
-      if (remaining <= 0) {
-        sessionStorage.removeItem('gs_contact_cooldown');
-        contactBtn.disabled = false;
-        contactBtn.textContent = 'Send enquiry';
-        return;
-      }
-      contactBtn.disabled = true;
-      contactBtn.textContent = 'Please wait ' + Math.ceil(remaining / 1000) + 's...';
-      setTimeout(restoreContactCooldown, 1000);
-    };
-    restoreContactCooldown();
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      var existingCooldown = Number(sessionStorage.getItem('gs_contact_cooldown') || 0);
-      if (existingCooldown > Date.now()) {
-        restoreContactCooldown();
-        return;
-      }
       var v = function(n){ return (form[n] && form[n].value || '').trim(); };
       var errs = {
         name: v('name') ? '' : 'Please add your name.',
@@ -178,9 +159,12 @@
           .then(function(){
             sent.innerHTML = '<h3>Thanks, ' + safeName + '. Your enquiry has been sent.</h3><p class="muted">I reply to every enquiry within one working day, by ' + method.toLowerCase() + ' as you asked.</p>';
             sent.hidden = false; form.reset();
-            var cooldownUntil = Date.now() + 30000;
-            sessionStorage.setItem('gs_contact_cooldown', String(cooldownUntil));
-            restoreContactCooldown();          })
+            btn.disabled = true; btn.textContent = 'Please wait 30 seconds...';
+            setTimeout(function(){
+              btn.disabled = false;
+              btn.textContent = 'Send enquiry';
+            }, 30000);
+          })
           .catch(function(){
             btn.disabled = false; btn.textContent = 'Send enquiry';
             sent.innerHTML = '<h3>That didn\'t go through.</h3><p class="muted">Please try again, or email ' + CONTACT_EMAIL + ' directly.</p>';
@@ -329,7 +313,7 @@
       ['','  '],['t-fn','openWhatsApp'],['t-p','('],['t-str',"'Hi! Is Saturday free?'"],['t-p',');\n'],
       ['t-p','});']] }
   ];
-  var TERM = [['cmd','$ npm run build'],['dim','  compiling 12 pages�'],['ok','? pages built'],['ok','? images converted to webp'],['ok','? accessibility checks passed'],['cmd','$ deploy --production'],['ok','? live � concept preview']];
+  var TERM = [['cmd','$ npm run build'],['dim','  compiling 12 pages…'],['ok','✓ pages built'],['ok','✓ images converted to webp'],['ok','✓ accessibility checks passed'],['cmd','$ deploy --production'],['ok','✓ live · concept preview']];
   var escH = function(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
   function startLive(root){
     if (root.dataset.started) return; root.dataset.started = '1';
@@ -346,7 +330,7 @@
     var full = function(s){ return s.code.reduce(function(a, t){ return a + t[1].length; }, 0); };
     (async function loop(){
       for (;;) {
-        stage.dataset.step = '0'; out.innerHTML = '<span class="dim">$ waiting�</span>'; st.classList.remove('ok'); stt.textContent = 'Writing code�';
+        stage.dataset.step = '0'; out.innerHTML = '<span class="dim">$ waiting…</span>'; st.classList.remove('ok'); stt.textContent = 'Writing code…';
         for (var s = 0; s < SNIPS.length; s++) {
           var sn = SNIPS[s]; tabs.forEach(function(t, i){ t.classList.toggle('on', i === sn.f); });
           var tot = full(sn);
@@ -356,9 +340,9 @@
           stage.dataset.step = String(sn.step); stt.textContent = ['', 'HTML rendered', 'Styles applied', 'Interaction added'][sn.step];
           await wait(1500);
         }
-        out.innerHTML = ''; stt.textContent = 'Building�';
+        out.innerHTML = ''; stt.textContent = 'Building…';
         for (var j = 0; j < TERM.length; j++) { out.innerHTML += '<span class="' + TERM[j][0] + '">' + escH(TERM[j][1]) + '</span>\n'; await wait(TERM[j][0] === 'dim' ? 700 : 420); }
-        stage.dataset.step = '4'; st.classList.add('ok'); stt.textContent = 'Deployed � all checks passed';
+        stage.dataset.step = '4'; st.classList.add('ok'); stt.textContent = 'Deployed · all checks passed';
         await wait(4200);
       }
     })();
