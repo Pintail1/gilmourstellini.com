@@ -149,10 +149,11 @@
       var stage = $('rqStage'); stage.innerHTML = html;
       var live = stage.querySelector('svg[data-live]'); if (live) drawInto(live, res.url);
     }
+    function orderCooling() { return !!(window.GSCooldown && window.GSCooldown.remaining('order')); }
     function setVerify(cls, text) { var v = $('rqVerify'); v.className = 'rq-verify ' + cls; v.textContent = text; }
     function gate() {
       var ok = verified && verified.ok;
-      $('rqSend').disabled = !ok;
+      $('rqSend').disabled = !ok || orderCooling();
       $('rqGate').textContent = ok ? 'Your QR code is verified and ready to send.' : (res.state === 'empty' ? 'Add and verify your review link to continue.' : res.state === 'bad' ? 'Fix your review link to continue.' : 'Checking your QR code…');
       ['rqSvg', 'rqPng', 'rqCopy'].forEach(function (id) { $(id).disabled = !ok; });
       $('rqTest').setAttribute('aria-disabled', String(!ok)); $('rqTest').href = ok ? res.url : '#';
@@ -202,30 +203,16 @@
     $('rqTest').addEventListener('click', function (e) { if (this.getAttribute('aria-disabled') === 'true') e.preventDefault(); });
 
     /* order request: stored with the review link and print-ready QR artwork */
-    var orderBtn = rqSend;
-    var restoreOrderCooldown = function(){
-      var remaining = Math.max(0, Number(sessionStorage.getItem('gs_order_cooldown') || 0) - Date.now());
-      if (remaining <= 0) {
-        sessionStorage.removeItem('gs_order_cooldown');
-        orderBtn.disabled = false;
-        orderBtn.textContent = 'Send order request';
-        return;
-      }
-      orderBtn.disabled = true;
-      orderBtn.textContent = 'Please wait ' + Math.ceil(remaining / 1000) + 's...';
-      setTimeout(restoreOrderCooldown, 1000);
-    };
-    restoreOrderCooldown();
-    rqOrder.addEventListener('submit', function (e) {
+    /* 30-second cooldown after a sent order (shared helper in app.js; survives a refresh) */
+    var restoreOrderCooldown = function () { if (window.GSCooldown) window.GSCooldown.run('order', $('rqSend'), 'Send order request', gate); };
+    try { sessionStorage.removeItem('gs_order_cooldown'); } catch (e) {} /* replaced by the shared cooldown */
+    if (orderCooling()) restoreOrderCooldown();
+    $('rqOrder').addEventListener('submit', function (e) {
       e.preventDefault();
-      var existingCooldown = Number(sessionStorage.getItem('gs_order_cooldown') || 0);
-      if (existingCooldown > Date.now()) {
-        restoreOrderCooldown();
-        return;
-      }
+      if (orderCooling()) { restoreOrderCooldown(); return; }
       var v = function (id) { return $(id).value.trim(); };
-      var errs = { name: v('ro-name') ? (v('ro-name').length > 80 ? 'Please keep your name under 80 characters.' : '') : 'Please add your name.',
-        email: (/^\S+@\S+\.\S+$/.test(v('ro-email')) && v('ro-email').length <= 150) ? '' : 'Please add an email address.',
+      var errs = { name: v('ro-name') ? (v('ro-name').length > 60 ? 'Please keep your name under 60 characters.' : '') : 'Please add your name.',
+        email: (/^\S+@\S+\.\S+$/.test(v('ro-email')) && v('ro-email').length <= 254) ? '' : 'Please add an email address.',
         phone: (!v('ro-phone') || /^\+?[0-9 ()./-]{6,25}$/.test(v('ro-phone'))) ? '' : 'Please check the phone number (digits, spaces and + only).' };
       $('ro-e-name').textContent = errs.name; $('ro-e-email').textContent = errs.email; $('ro-e-phone').textContent = errs.phone;
       if (errs.name || errs.email || errs.phone) { $(errs.name ? 'ro-name' : errs.email ? 'ro-email' : 'ro-phone').focus(); return; }
@@ -274,7 +261,7 @@
           if (order.logo) { try { var parts = order.logo.dataUrl.split(','), mime = parts[0].split(':')[1].split(';')[0], bin = atob(parts[1]), arr = new Uint8Array(bin.length); for (var k = 0; k < bin.length; k++) arr[k] = bin.charCodeAt(k); fd.append('logo', new Blob([arr], { type: mime }), order.logo.fileName); } catch (er) {} }
         }
         fetch(ORDER_URL, { method: 'POST', headers: { 'Accept': 'application/json' }, body: fd })
-          .then(function (r) { if (!r.ok) throw new Error(r.status); sessionStorage.setItem('gs_order_cooldown', String(Date.now() + 30000)); finish(true); })
+          .then(function (r) { if (!r.ok) throw new Error(r.status); if (window.GSCooldown) window.GSCooldown.start('order'); finish(true); })
           .catch(function () { btn.disabled = false; btn.textContent = 'Send order request'; done.hidden = false; done.innerHTML = '<h3>That didn\'t go through.</h3><p class="muted">Please try again, or email gilmourstellini@icloud.com quoting ' + ref + '.</p>'; });
         return;
       }

@@ -122,12 +122,45 @@
     var r = document.createRange(); r.selectNodeContents(v); var s = getSelection(); s.removeAllRanges(); s.addRange(r);
   }
   /* ---------- contact form ---------- */
+  /* ---------- 30-second cooldown after a successful form send ----------
+     Stores only the time the cooldown ends (no personal data), so it carries on after a refresh or in a new tab.
+     Shared by the contact form (here) and the order form (review.js). */
+  var COOLDOWN_MS = 30000, cdMem = {}, cdTimers = {};
+  var CD = window.GSCooldown = {
+    remaining: function (key) {
+      var until = cdMem[key] || 0;
+      try { until = Number(localStorage.getItem('gs-cooldown-' + key)) || until; } catch (e) {}
+      var left = Math.min(COOLDOWN_MS, Math.max(0, until - Date.now()));
+      if (!left && until) { delete cdMem[key]; try { localStorage.removeItem('gs-cooldown-' + key); } catch (e) {} } /* tidy up an expired timer */
+      return left;
+    },
+    start: function (key) {
+      cdMem[key] = Date.now() + COOLDOWN_MS;
+      try { localStorage.setItem('gs-cooldown-' + key, String(cdMem[key])); } catch (e) {}
+    },
+    /* keeps btn disabled with a visible countdown, then restores its label and calls onEnd */
+    run: function (key, btn, label, onEnd) {
+      clearTimeout(cdTimers[key]);
+      (function tick() {
+        var left = CD.remaining(key);
+        if (!left) {
+          btn.textContent = label; btn.disabled = false; if (onEnd) onEnd(); return;
+        }
+        btn.disabled = true; btn.textContent = 'Please wait ' + Math.ceil(left / 1000) + 's';
+        cdTimers[key] = setTimeout(tick, (left % 1000) || 1000);
+      })();
+    }
+  };
+
   var form = document.getElementById('enquiry');
   if (form) {
+    var formBtn = form.querySelector('button[type="submit"]');
+    if (CD.remaining('contact')) CD.run('contact', formBtn, 'Send enquiry');
     var q = new URLSearchParams(location.search);
     if (q.get('service')) { var opt = form.service.querySelector('option[value="' + q.get('service') + '"]'); if (opt) form.service.value = q.get('service'); }
     form.addEventListener('submit', function(e){
       e.preventDefault();
+      if (CD.remaining('contact')) { CD.run('contact', formBtn, 'Send enquiry'); return; } /* still cooling down */
       var v = function(n){ return (form[n] && form[n].value || '').trim(); };
       var errs = {
         name: v('name') ? '' : 'Please add your name.',
@@ -135,8 +168,8 @@
         message: v('message').length >= 10 ? '' : 'Please add a few words about your project.',
         phone: (!v('phone') || /^\+?[0-9 ()./-]{6,25}$/.test(v('phone'))) ? '' : 'Please check the phone number (digits, spaces and + only).'
       };
-      if (!errs.name && v('name').length > 80) errs.name = 'Please keep your name under 80 characters.';
-      if (!errs.email && v('email').length > 150) errs.email = 'Please check the email address.';
+      if (!errs.name && v('name').length > 60) errs.name = 'Please keep your name under 60 characters.';
+      if (!errs.email && v('email').length > 254) errs.email = 'Please check the email address.';
       if (!errs.message && v('message').length > 5000) errs.message = 'Please keep your message under 5,000 characters.';
       ['name','email','phone','message'].forEach(function(k){ var el = document.getElementById('e-' + k); if (el) el.textContent = errs[k]; });
       var first = ['name','email','phone','message'].filter(function(k){ return errs[k]; })[0];
@@ -158,9 +191,9 @@
           .then(function(r){ if (!r.ok) throw new Error(r.status); })
           .then(function(){
             sent.innerHTML = '<h3>Thanks, ' + safeName + '. Your enquiry has been sent.</h3><p class="muted">I reply to every enquiry within one working day, by ' + method.toLowerCase() + ' as you asked.</p>';
-            sent.hidden = false; form.reset(); btn.disabled = false; btn.textContent = 'Send enquiry';
+            sent.hidden = false; form.reset();
+            CD.start('contact'); CD.run('contact', btn, 'Send enquiry');
           })
-          .finally(function(){ btn.disabled = false; btn.textContent = 'Send enquiry'; })
           .catch(function(){
             btn.disabled = false; btn.textContent = 'Send enquiry';
             sent.innerHTML = '<h3>That didn\'t go through.</h3><p class="muted">Please try again, or email ' + CONTACT_EMAIL + ' directly.</p>';
