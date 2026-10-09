@@ -158,15 +158,29 @@
     if (CD.remaining('contact')) CD.run('contact', formBtn, 'Send enquiry');
     var q = new URLSearchParams(location.search);
     if (q.get('service')) { var opt = form.service.querySelector('option[value="' + q.get('service') + '"]'); if (opt) form.service.value = q.get('service'); }
+    var phoneHint = document.getElementById('phone-hint');
+    var syncPhone = function(){
+      var m = (form.querySelector('input[name="contact_method"]:checked') || {}).value || 'Email';
+      var need = m !== 'Email';
+      if (phoneHint) phoneHint.textContent = need ? '(needed for ' + m + ')' : '(optional)';
+      if (form.phone) form.phone.required = need;
+      if (!need) { var pe = document.getElementById('e-phone'); if (pe && !form.phone.value.trim()) pe.textContent = ''; }
+    };
+    Array.prototype.forEach.call(form.querySelectorAll('input[name="contact_method"]'), function(r){ r.addEventListener('change', syncPhone); });
+    form.addEventListener('reset', function(){ setTimeout(syncPhone, 0); });
+    syncPhone();
     form.addEventListener('submit', function(e){
       e.preventDefault();
       if (CD.remaining('contact')) { CD.run('contact', formBtn, 'Send enquiry'); return; } /* still cooling down */
       var v = function(n){ return (form[n] && form[n].value || '').trim(); };
+      var method = (form.querySelector('input[name="contact_method"]:checked') || {}).value || 'Email';
+      var needPhone = method !== 'Email';
       var errs = {
         name: v('name') ? '' : 'Please add your name.',
         email: /^\S+@\S+\.\S+$/.test(v('email')) ? '' : 'Please add an email address I can reply to.',
         message: v('message').length >= 10 ? '' : 'Please add a few words about your project.',
-        phone: (!v('phone') || /^\+?[0-9 ()./-]{6,25}$/.test(v('phone'))) ? '' : 'Please check the phone number (digits, spaces and + only).'
+        phone: !v('phone') ? (needPhone ? 'Please add your number so I can reply by ' + (method === 'WhatsApp' ? 'WhatsApp' : 'phone') + '.' : '') :
+               (/^\+?[0-9 ()./-]{6,25}$/.test(v('phone')) ? '' : 'Please check the phone number (digits, spaces and + only).')
       };
       if (!errs.name && v('name').length > 60) errs.name = 'Please keep your name under 60 characters.';
       if (!errs.email && v('email').length > 254) errs.email = 'Please check the email address.';
@@ -176,7 +190,6 @@
       if (first) { form[first].focus(); return; }
       if (v('website') || (form.botcheck && form.botcheck.checked)) return; /* honeypots: left empty by people, filled by bots */
       var sent = document.getElementById('sent');
-      var method = (form.querySelector('input[name="contact_method"]:checked') || {}).value || 'Email';
       var lines = [
         'Name: ' + v('name'), 'Email: ' + v('email'), 'Business: ' + (v('business') || '-'),
         'Service: ' + v('service'), 'Budget: ' + (v('budget') || 'Prefer to discuss'),
@@ -187,7 +200,7 @@
       var btn = form.querySelector('button[type="submit"]');
       if (endpoint && MODE !== 'preview') {
         btn.disabled = true; btn.textContent = 'Sending...';
-        fetch(endpoint, { method: 'POST', body: (function(){ var fd = new FormData(form); if (window.GS_WEB3FORMS_KEY) { fd.append('access_key', window.GS_WEB3FORMS_KEY); fd.append('subject', 'New website enquiry from ' + (fd.get('name') || 'the website')); fd.append('from_name', 'gilmourstellini.com'); } return fd; })(), headers: { 'Accept': 'application/json' } })
+        fetch(endpoint, { method: 'POST', body: (function(){ var fd = new FormData(form); if (window.GS_WEB3FORMS_KEY) { fd.append('access_key', window.GS_WEB3FORMS_KEY); fd.append('subject', 'New enquiry – ' + method + ' – ' + (fd.get('name') || 'website visitor')); fd.append('from_name', 'gilmourstellini.com'); } return fd; })(), headers: { 'Accept': 'application/json' } })
           .then(function(r){ if (!r.ok) throw new Error(r.status); })
           .then(function(){
             sent.innerHTML = '<h3>Thanks, ' + safeName + '. Your enquiry has been sent.</h3><p class="muted">I reply to every enquiry within one working day, by ' + method.toLowerCase() + ' as you asked.</p>';
@@ -196,7 +209,7 @@
           })
           .catch(function(){
             btn.disabled = false; btn.textContent = 'Send enquiry';
-            sent.innerHTML = '<h3>That didn\'t go through.</h3><p class="muted">Please try again, or email ' + CONTACT_EMAIL + ' directly.</p>';
+            sent.innerHTML = '<h3>That didn\'t go through.</h3><p class="muted">Please try again, or <a class="textlink" href="https://wa.me/35699470206?text=Hi%20Gilmour%2C%20I%20found%20you%20on%20gilmourstellini.com" target="_blank" rel="noopener">message me on WhatsApp</a>.</p>';
             sent.hidden = false;
           });
         return;

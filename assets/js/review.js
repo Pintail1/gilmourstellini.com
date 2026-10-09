@@ -262,7 +262,7 @@
         }
         fetch(ORDER_URL, { method: 'POST', headers: { 'Accept': 'application/json' }, body: fd })
           .then(function (r) { if (!r.ok) throw new Error(r.status); if (window.GSCooldown) window.GSCooldown.start('order'); finish(true); })
-          .catch(function () { btn.disabled = false; btn.textContent = 'Send order request'; done.hidden = false; done.innerHTML = '<h3>That didn\'t go through.</h3><p class="muted">Please try again, or email gilmourstellini@icloud.com quoting ' + ref + '.</p>'; });
+          .catch(function () { btn.disabled = false; btn.textContent = 'Send order request'; done.hidden = false; done.innerHTML = '<h3>That didn\'t go through.</h3><p class="muted">Please try again, or message me on WhatsApp quoting ' + ref + '.</p>'; });
         return;
       }
       if (MODE !== 'preview') {
