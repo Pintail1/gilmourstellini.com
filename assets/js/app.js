@@ -32,8 +32,8 @@
       setTimeout(function(){ loader.classList.add('out'); setTimeout(function(){ loader.remove(); }, 500); }, DRAW_MS + 150);
     }
   }
-  /* heavy live previews wait until the logo has finished drawing */
-  var HEAVY_DELAY = firstVisit ? DRAW_MS + 650 : DRAW_MS, T0 = performance.now();
+  /* previews load straight away (set a delay in ms here to hold them back while the logo draws) */
+  var HEAVY_DELAY = 0, T0 = performance.now();
   function later(fn){ setTimeout(fn, Math.max(0, HEAVY_DELAY - (performance.now() - T0))); }
   /* ---------- live project screens ---------- */
   function fit(screen){
