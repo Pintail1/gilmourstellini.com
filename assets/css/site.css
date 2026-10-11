@@ -66,13 +66,17 @@ a:hover .arrow{transform:translateX(4px)}
 .gs path{fill:none;stroke-linecap:round;stroke-linejoin:round}
 .gs .g{stroke:currentColor}
 .gs .s{stroke:var(--cobalt)}
-.gs.draw path{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.3s cubic-bezier(.65,0,.35,1) forwards}
-.gs.draw .s{animation-delay:.45s}
+.gs.draw path{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .01s 2.5s forwards}
+/* the draw starts once the page script has measured each stroke (see app.js), so it runs smoothly */
+.gs.draw.go path{animation:draw 1.2s cubic-bezier(.65,0,.35,1) forwards;will-change:stroke-dashoffset}
+.gs.draw.go .s{animation-delay:.4s}
+@media (scripting:none){.gs.draw path{stroke-dashoffset:0;animation:none}}
 @keyframes draw{to{stroke-dashoffset:0}}
 .wm{display:block;height:17px;width:auto;fill:currentColor}
 
 /* loader (brief GS draw on first visit, never blocks content) */
-.loader{position:fixed;inset:0;z-index:300;background:var(--paper);display:grid;place-items:center;animation:loaderOut .45s ease 1.25s forwards;pointer-events:none}
+.loader{position:fixed;inset:0;z-index:300;background:var(--paper);display:grid;place-items:center;animation:loaderOut .45s ease 3.2s forwards;pointer-events:none}
+.loader.out{animation:loaderOut .45s ease forwards}
 .loader .gs{width:64px;height:64px;color:var(--ink)}
 .loader .gs path{stroke-width:3.4}
 @keyframes loaderOut{to{opacity:0;visibility:hidden}}

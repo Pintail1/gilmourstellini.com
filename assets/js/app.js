@@ -5,12 +5,36 @@
   var CONTACT_EMAIL = 'gilmourstellini@icloud.com';
   document.documentElement.classList.add('js');
   /* ---------- loader: shows once per visit ---------- */
-  var loader = document.querySelector('.loader');
+  /* GS logo draw: measure each stroke's real length so the line draws evenly in every browser,
+     then start the animation on the next frame, before any heavy work begins. */
+  var DRAW_MS = 1650; /* 1.2s stroke + 0.4s delay on the S, plus a frame of slack */
+  (function(){
+    var marks = document.querySelectorAll('.gs.draw');
+    marks.forEach(function(svg){
+      svg.querySelectorAll('path').forEach(function(p){
+        try {
+          p.removeAttribute('pathLength');
+          var L = p.getTotalLength();
+          p.style.strokeDasharray = L + ' ' + (L + 4);
+          p.style.strokeDashoffset = L;
+        } catch(e) {}
+      });
+    });
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ marks.forEach(function(svg){ svg.classList.add('go'); }); }); });
+  })();
+  var loader = document.querySelector('.loader'), firstVisit = false;
   if (loader) {
     var seen = false;
     try { seen = sessionStorage.getItem('gs-loader') === '1'; sessionStorage.setItem('gs-loader','1'); } catch(e) {}
-    if (seen) loader.remove(); else setTimeout(function(){ loader.remove(); }, 1800);
+    if (seen) loader.remove();
+    else {
+      firstVisit = true;
+      setTimeout(function(){ loader.classList.add('out'); setTimeout(function(){ loader.remove(); }, 500); }, DRAW_MS + 150);
+    }
   }
+  /* heavy live previews wait until the logo has finished drawing */
+  var HEAVY_DELAY = firstVisit ? DRAW_MS + 650 : DRAW_MS, T0 = performance.now();
+  function later(fn){ setTimeout(fn, Math.max(0, HEAVY_DELAY - (performance.now() - T0))); }
   /* ---------- live project screens ---------- */
   function fit(screen){
     var f = screen.querySelector('iframe'); if (!f) return;
@@ -42,13 +66,14 @@
     else f.src = projectSrc(screen.dataset.p);
   }
   var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(es){
-    es.forEach(function(e){ if (e.isIntersecting) { load(e.target); io.unobserve(e.target); } });
+    es.forEach(function(e){ if (e.isIntersecting) { var t = e.target; io.unobserve(t); later(function(){ load(t); }); } });
   }, { rootMargin: '400px' }) : null;
   function wire(root){
     root.querySelectorAll('.screen[data-p]').forEach(function(s){
       if (s.dataset.wired) return; s.dataset.wired = '1';
       if (ro) ro.observe(s);
-      if (io && !s.hasAttribute('data-eager')) io.observe(s); else load(s);
+      if (io && !s.hasAttribute('data-eager')) io.observe(s);
+      else later(function(){ load(s); });
     });
   }
   window.addEventListener('resize', function(){ document.querySelectorAll('.screen[data-p]').forEach(fit); });
