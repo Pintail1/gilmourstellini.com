@@ -1123,3 +1123,6 @@ html:not(.js) .loader{display:none}
 .fbc-thumbs img{height:260px;object-position:50% 20%}
 .fbc-body{gap:16px}
 @media (max-width:820px){.fbc-thumbs{grid-template-rows:200px}.fbc-thumbs img{height:200px}}
+/* big screens: use more of the width (laptops and phones unchanged) */
+@media (min-width:1600px){.wrap{max-width:1440px}}
+@media (min-width:2200px){.wrap{max-width:1640px}}
