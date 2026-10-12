@@ -590,8 +590,8 @@ fieldset.field{border:0;margin:0;padding:0}
 .marquee span:nth-child(3n)::after{background:var(--sun)}
 @keyframes marq{to{transform:translateX(-50%)}}
 .scr{white-space:pre-wrap}
-.js .wipe{clip-path:inset(0 100% 0 0);transition:clip-path 1s cubic-bezier(.7,0,.2,1)}
-.js .wipe.in{clip-path:inset(0 0 0 0)}
+.js .wipe{clip-path:inset(-.3em 100% -.35em -.25em);transition:clip-path 1s cubic-bezier(.7,0,.2,1)}
+.js .wipe.in{clip-path:inset(-.3em -.25em -.35em -.25em)}
 .flow.drawn::before{background:linear-gradient(90deg,var(--cobalt) var(--fp,0%),transparent var(--fp,0%)),repeating-linear-gradient(90deg,var(--line-2) 0 6px,transparent 6px 12px)}
 .flow b{transition:background .4s,color .4s}
 .flow b.lit{background:var(--cobalt);color:var(--on-cobalt)}
